@@ -96,9 +96,8 @@
       </div>
         <center>
           <div class="col-12">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" name="buscar"><i class="fa fa-search"></i>BUSCAR</button>
-            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" name="buscar"><i class="fa fa-search"></i>BUSCAR</button>
-           </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search"></i> buscar </button>
+             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search"></i> buscar </button>
         </center>
     </form>
 
@@ -145,33 +144,34 @@
                       $resultado = $conexion->query($consulta);
                       if($resultado -> num_rows > 0){
                         while($fila = $resultado->fetch_assoc()){
-                           echo "<p>".$fila["Nombre"]."</p>";
-                           echo "<p>".$fila["Apellidos"]."</p>";
-                           echo "<p>".$fila["Correoelectronico"]."</p>"; 
-                           echo "<p>".$fila["Telefonoparticular"]."</p>";  
-                           echo "<p>".$fila["Telefonomovil"]."</p>";  
-                           echo "<p>".$fila["Registros"]."</p>";  
-                           echo "<p>".$fila["Estado_provincia"]."</p>";
-                           echo "<p>".$fila["Notas"]."</p>";
-                           echo "<p>".$fila["Sin_viaticos"]."</p>";       
+                          
+                           echo "<H5>DATOS GENERALES</H5>";
+                           echo "<p> Nombre: ".$fila["Nombre"]."</p>";
+                           echo "<p> Apellidos: ".$fila["Apellidos"]."</p>";
+                           echo "<p> Correo: ".$fila["Correoelectronico"]."</p>"; 
+                           echo "<p> Telefono Particular: ".$fila["Telefonoparticular"]."</p>";  
+                           echo "<p> Telefono Movil: ".$fila["Telefonomovil"]."</p>";
+                           echo "<H5>UBICACION</H5>"; 
+                           echo "<p> Residencia: ".$fila["Residencia"]."</p>";
+                           echo "<p> Registro: ".$fila["Registros"]."</p>";  
+                           echo "<p> Estado Provincia: ".$fila["Estado_provincia"]."</p>";
+                           echo "<p> Ciudad: ".$fila["Ciudad"]."</p>";
+                           echo "<H5>COBERTURA</H5>";
+                           echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
+                           echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
+                           echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>";      
                         }
                       }
                     }
               ?>
-              <p>pruebaaaaaaa</p>
-              <p>nombre</p>
-              <p>apellido</p>
-              <p>ciudad</p>
-              <p>telefono</p>
-              <p>registro</p>
               <div class="mb-3">
-                <label for="message-text" class="col-form-label">Message:</label>
+                <label for="message-text" class="col-form-label">Notas</label>
                 <textarea class="form-control" id="message-text"></textarea>
               </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Send message</button>
+  
           </div>
         </div>
       </div>
