@@ -97,7 +97,6 @@
         <center>
           <div class="col-12">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search"></i> buscar </button>
-             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search"></i> buscar </button>
         </center>
     </form>
 
