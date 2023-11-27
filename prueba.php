@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="sesion2.css">
+    <link rel="stylesheet" href="prueba.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -89,14 +89,14 @@
       </div>
         <center>
 
-          <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search" name="buscar"></i> buscar </button>
+          <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
         </center>
     </form>
     <br>
 
   </div>
-   <div id="formulario">
-   <table class="table table-striped table-dark table_id ">
+   <div id="tabla_peritos">
+        <table class="table table-striped">
 
                                         
                         <thead>    
@@ -104,19 +104,12 @@
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Correo</th>
-                        <th>Telefono Particular</th>
                         <th>Telefono Movil</th>
                         <th>Residencia</th>
                         <th>Registros</th>
                         <th>Estado Provincia</th>
-                        <th>Ciudad</th>
-                        <th>Con viaticos</th>
-                        <th>Sin Viaticos</th>
-                        <th>Datos adjuntos</th>
+                        <th>Notas</th>
                         <th>Mostrar info</th>
-
-
-
                         </tr>
                         </thead>
                         <tbody> 
@@ -153,28 +146,74 @@
          
          $resultado = $conexion->query($consulta);
          if($resultado -> num_rows > 0){
-
               while($fila = $resultado->fetch_assoc()){
         ?>  
         <tr>
                 <td><?php echo $fila['Nombre']; ?></td>
                 <td><?php echo $fila['Apellidos']; ?></td>
                 <td><?php echo $fila['Correoelectronico']; ?></td>
-                <td><?php echo $fila['Telefonoparticular']; ?></td>
                 <td><?php echo $fila['Telefonomovil']; ?></td>
                 <td><?php echo $fila['Residencia']; ?></td>
                 <td><?php echo $fila['Registros']; ?></td>
                 <td><?php echo $fila['Estado_provincia']; ?></td>
-                <td><?php echo $fila['Ciudad']; ?></td>
-                <td><?php echo $fila['Sin_viaticos']; ?></td>
-                <td><?php echo $fila['Con_viaticos']; ?></td>
-                <td><?php echo $fila['Datos_adjuntos']; ?></td> 
-                <td><button type="button" class="btn btn-info">info</button></td>             
+                <td><?php echo $fila['Notas']; ?></td> 
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" name="info">info</button></td>             
         <?php           
                 }
          }     
     ?>
    </div>
+
+   <div id="info_peritos">
+          <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">PERITOS</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <?php
+                              if(isset($_GET["buscar"])){
+                                $conexion = new mysqli($servername, $username, $password,$database);
+                                $consulta = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
+                                
+                                $resultado = $conexion->query($consulta);
+                                if($resultado -> num_rows > 0){
+                                  while($fila = $resultado->fetch_assoc()){
+                                    
+                                     echo "<H5>DATOS GENERALES</H5>";
+                                     echo "<p> Nombre: ".$fila["Nombre"]."</p>";
+                                     echo "<p> Apellidos: ".$fila["Apellidos"]."</p>";
+                                     echo "<p> Correo: ".$fila["Correoelectronico"]."</p>"; 
+                                     echo "<p> Telefono Particular: ".$fila["Telefonoparticular"]."</p>";  
+                                     echo "<p> Telefono Movil: ".$fila["Telefonomovil"]."</p>";
+                                     echo "<H5>UBICACION</H5>"; 
+                                     echo "<p> Residencia: ".$fila["Residencia"]."</p>";
+                                     echo "<p> Registro: ".$fila["Registros"]."</p>";  
+                                     echo "<p> Estado Provincia: ".$fila["Estado_provincia"]."</p>";
+                                     echo "<p> Ciudad: ".$fila["Ciudad"]."</p>";
+                                     echo "<H5>COBERTURA</H5>";
+                                     echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
+                                     echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
+                                     echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>"; 
+                                     echo " <textarea class='form-control' id='message-text'></textarea>";     
+                                    }
+                                 }
+                              }   
+                    ?>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+   </div>
+   
 
   
 </body>
