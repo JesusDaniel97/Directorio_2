@@ -158,7 +158,7 @@
                 <td><?php echo $fila['Estado_provincia']; ?></td>
                 <td><?php echo $fila['Notas']; ?></td> 
                 <td><button type="button">editar</button></td>
-                <td><button type="button">Eliminar</button></td>
+                <td><a href="Eliminar_perito.php?nombre=<?php echo $fila['Nombre']?>">Eliminar</a></td>
                 <td><a href="Agregar_Perito.html">Agregar</a></td>
 
         <?php           
