@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,12 @@
           <h5>Registro de Usuarios</h5>
           <input type="text" class="form-control" id="validationCustom01"  name="nombre" placeholder="Nombre" required><br>
           <input type="text" class="form-control" id="validationCustom02"  name="apellidos" placeholder="apellidos" required><br>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="correo" placeholder="email" >
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="correo" placeholder="email" ><br>
+           <select name="permiso" id="permiso" class="form-select">
+            <option selected disabled value="">usuario...</option>
+             <option value="lector">lector</option>
+             <option value="administrador">administrador</option>
+           </select>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Ingrese una contraseña</label>
