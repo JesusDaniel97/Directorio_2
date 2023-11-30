@@ -1,0 +1,31 @@
+#formulario-2{
+    position: absolute;
+    max-width: 700px;
+    background-color: rgb(110, 109, 122);
+    padding: 10px;
+    left: 170px;
+}
+
+textarea{
+    
+    height: 100px;
+    border-radius: 8px;
+    max-width: 60px;
+    padding-left: 20px;
+
+}
+
+input[type=checkbox]{
+    position: relative;
+    left: 150px;
+}
+
+input[type=text]{
+   max-width: 250px;
+    
+}
+
+input[type=tel]{
+    max-width: 250px;  
+}
+
