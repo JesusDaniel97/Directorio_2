@@ -4,6 +4,7 @@
    $correo = "";
    $contraseña = "";
    $usuario = "";
+   $permiso = "";
    
    if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if(empty($_POST["nombre"])){
@@ -28,6 +29,12 @@
       }else{
          $contraseña = $_POST["contrasenia"];
       }
+
+      if(empty($_POST["permiso"])){
+         echo "el permiso es requerido ";
+      }else{
+         $permiso = $_POST["permiso"];
+      }
       
    }     
 
@@ -38,8 +45,8 @@
     die("Conexion fallida: " . mysqli_connect_error());
   }
 
-   $sql = "INSERT INTO registro (Usuario, Contrasenia ,Correo)
-   VALUES ('$usuario', '$contraseña', '$correo');";
+   $sql = "INSERT INTO registro (Usuario, Contrasenia ,Correo, permiso)
+   VALUES ('$usuario', '$contraseña', '$correo','$permiso');";
 
    if (mysqli_multi_query($conexion, $sql)) {
         header("Location:Registro.html");
