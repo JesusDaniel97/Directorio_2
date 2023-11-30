@@ -1,3 +1,10 @@
+<?php
+   session_start();
+   if(!isset($_SESSION["usuario"])){
+      header("Location:index.html");
+   }
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +23,7 @@
 <body>
   <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
     <div class="bg-dark p-4">
-      <h5 style="color:white;">BIENVENIDO ADMINISTRADOR</h5> 
+      <h5 style="color:white;">BIENVENIDO ADMINISTRADOR/A <?php echo $_SESSION["usuario"]?></h5> 
       <span class="text-body-secondary"><a href="Cerrar_Sesion.php">Cerrar Sesion</a></span>
     </div>
   </div>
@@ -159,8 +166,8 @@
                 <td><?php echo $fila['Residencia']; ?></td>
                 <td><?php echo $fila['Registros']; ?></td>
                 <td><?php echo $fila['Estado_provincia']; ?></td>
-                <td><?php echo $fila['Notas']; ?></td> 
-                
+                <td><?php echo $fila['Notas']; ?></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" name="info">info</button></td>                         
                 <td><i class="bi bi-exclamation-lg"><a class="btn btn-warning"  href="Editar_perito.php?nombre=<?php echo $fila['Nombre']?>">editar</a></i></td>
                 <td><a class="btn btn-danger"  href="Eliminar_perito.php?nombre=<?php echo $fila['Nombre']?>">Eliminar</a></td>
                 
@@ -169,6 +176,56 @@
                 }
          }     
     ?>
+
+<div id="info_peritos">
+          <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">PERITOS</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <?php
+                              if(isset($_GET["buscar"])){
+                                $conexion = new mysqli($servername, $username, $password,$database);
+                                $consulta = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
+                                
+                                $resultado = $conexion->query($consulta);
+                                if($resultado -> num_rows > 0){
+                                  while($fila = $resultado->fetch_assoc()){
+                                    
+                                     echo "<H5>DATOS GENERALES</H5>";
+                                     echo "<p> Nombre: ".$fila["Nombre"]."</p>";
+                                     echo "<p> Apellidos: ".$fila["Apellidos"]."</p>";
+                                     echo "<p> Correo: ".$fila["Correoelectronico"]."</p>"; 
+                                     echo "<p> Telefono Particular: ".$fila["Telefonoparticular"]."</p>";  
+                                     echo "<p> Telefono Movil: ".$fila["Telefonomovil"]."</p>";
+                                     echo "<H5>UBICACION</H5>"; 
+                                     echo "<p> Residencia: ".$fila["Residencia"]."</p>";
+                                     echo "<p> Registro: ".$fila["Registros"]."</p>";  
+                                     echo "<p> Estado Provincia: ".$fila["Estado_provincia"]."</p>";
+                                     echo "<p> Ciudad: ".$fila["Ciudad"]."</p>";
+                                     echo "<H5>COBERTURA</H5>";
+                                     echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
+                                     echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
+                                     echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>"; 
+                                     echo " <textarea class='form-control' id='message-text'></textarea>";     
+                                    }
+                                 }
+                              }   
+                    ?>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+    
    </div>
   
 </body>
