@@ -90,8 +90,11 @@
         <center>
 
           <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
+          <a href="Agregar_Perito.html" class="btn btn-success "> + Agregar</a>
         </center>
     </form>
+  
+    
     <br>
 
   </div>
@@ -158,9 +161,9 @@
                 <td><?php echo $fila['Estado_provincia']; ?></td>
                 <td><?php echo $fila['Notas']; ?></td> 
                 
-                <td><a href="Editar_perito.php?nombre=<?php echo $fila['Nombre']?>">editar</a></td>
-                <td><a href="Eliminar_perito.php?nombre=<?php echo $fila['Nombre']?>">Eliminar</a></td>
-                <td><a href="Agregar_Perito.html">Agregar</a></td>
+                <td><i class="bi bi-exclamation-lg"><a class="btn btn-warning"  href="Editar_perito.php?nombre=<?php echo $fila['Nombre']?>">editar</a></i></td>
+                <td><a class="btn btn-danger"  href="Eliminar_perito.php?nombre=<?php echo $fila['Nombre']?>">Eliminar</a></td>
+                
 
         <?php           
                 }
@@ -170,3 +173,4 @@
   
 </body>
 </html>
+  
