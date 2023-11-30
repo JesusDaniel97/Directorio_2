@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Editar_perito.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
     <div id="formulario-2">
         <form class="row g-3 needs-validation" novalidate method="POST" action="">
-            <div class="col-md-4 position-relative">
+            <div >
               <label for="validationTooltip01" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="validationTooltip01" name="nombre" required>
     
             </div>
             <br>
-            <div class="col-md-4 position-relative">
+            <div>
               <label for="validationTooltip02" class="form-label">Apellidos</label>
               <input type="text" class="form-control" id="validationTooltip02" name="apellidos" required>
               <br>
              
             </div>
-            <div class="col-md-4 position-relative">
+            <div>
               <label for="validationTooltipUsername" class="form-label">Correo</label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
@@ -31,23 +34,23 @@
             <br>
 
             <div id="Telefonoparticular">
-                <label for="">Telefono particular</label>
-                <input type="tel" id="telefono_particular" name="telefonoparticular" required>
+                <label>Telefono particular</label>
+                <input type="tel" id="telefono_particular" class="form-control" name="telefonoparticular" required>
             </div><br>
 
             <div id="Telefonomovil">
-                <label for="">Telefono movil</label>
-                <input type="tel"  id="telefono_movil" name="telefonomovil" required> 
+                <label>Telefono movil</label>
+                <input type="tel"  id="telefono_movil" class="form-control" name="telefonomovil" required> 
             </div><br>
             
             <div id="Registros">
-                <label for="">Registros</label>
-                <input type="text"  id="Registro" name="registro" required>
+                <label>Registros</label>
+                <input type="text"  id="Registro" class="form-control" name="registro" required>
             </div><br>
 
             <div id="Residencia">
-                <label for="">Residencia</label>
-                <input type="text" name="Residencia" id="Residencia" name="Residencia" required>
+                <label>Residencia</label>
+                <input type="text" name="Residencia" class="form-control" id="Residencia" name="Residencia" required>
             </div><br>
                 
             <div class="col-md-3 position-relative">
@@ -91,7 +94,7 @@
                 Please select a valid state.
               </div>
             </div><br>
-            <label for="">Notas</label>
+            <label >Notas</label>
             <textarea name="notas" id="" cols="30" rows="10">Notas</textarea>
             <br>
               
@@ -116,7 +119,7 @@
               <br>
 
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" name="actualizar">Actualizar</button>
+            <center><button class="btn btn-primary" type="submit">Actualizar</button></center>
             </div>
           </form>
 
