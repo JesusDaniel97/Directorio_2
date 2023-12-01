@@ -128,7 +128,7 @@
               <br>
 
             <div class="col-12">
-            <center><button class="btn btn-primary" type="submit">Actualizar</button></center>
+              <center><input type="submit" name="editar" value="Editar" class="btn btn-primary"></center>
             </div>
           </form>
 
