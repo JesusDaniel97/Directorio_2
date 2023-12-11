@@ -146,8 +146,12 @@
                         <td><?php echo $fila['Registros']; ?></td>
                         <td><?php echo $fila['Estado_provincia']; ?></td>
                         <td><?php echo $fila['Notas']; ?></td> 
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" name="info">info</button></td>             
-                <?php           
+                        <td><button type="button" class="btn btn-info" name="mostrar" data-bs-toggle="modal" data-bs-target="#info">info</button></td>
+                        
+                                 
+                <?php 
+                include('info.php');
+                        
                         }
                 }else{
                    echo "no hay resultados :(";
@@ -161,10 +165,3 @@
 
     
    </div>
-
-  
-   
-
-  
-</body>
-</html>
