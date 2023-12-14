@@ -4,6 +4,30 @@
       header("Location:index.html");
    }
 
+   require('conexion.php');
+   $conexion = new mysqli($servername, $username, $password,$database);
+   $nombre = $_GET['nombre'];
+   if(isset($nombre)){
+       $consulta = "SELECT * FROM contactos WHERE Nombre='$nombre'" ;
+       $resultado = $conexion->query($consulta);
+       if($resultado->num_rows>0){
+         while($fila = $resultado->fetch_assoc()){               
+                $nombre_perito = $fila["Nombre"];
+                $apellido_perito = $fila["Apellidos"];
+                $correo_perito = $fila['Correoelectronico'];
+                $telefono_p = $fila["Telefonoparticular"];
+                $telefono_m = $fila["Telefonomovil"]; 
+                $residencia_perito = $fila["Residencia"];
+                $registros_perito = $fila["Registros"];  
+                $estado_provincia_perito = $fila["Estado_provincia"];
+                $perito_ciudad = $fila["Ciudad"];
+                $perito_datos_adjuntos = $fila["Datos_adjuntos"];
+               
+                     
+         }
+       }
+    }
+
 ?>
 
 
@@ -22,13 +46,13 @@
         <form class="row g-3 needs-validation" novalidate method="POST" action="">
             <div >
               <label for="validationTooltip01" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="validationTooltip01" name="nombre" required>
+              <input type="text" class="form-control" id="validationTooltip01" name="nombre" value=<?php echo $nombre_perito;?>>
     
             </div>
             <br>
             <div>
               <label for="validationTooltip02" class="form-label">Apellidos</label>
-              <input type="text" class="form-control" id="validationTooltip02" name="apellidos" required>
+              <input type="text" class="form-control" id="validationTooltip02" name="apellidos" value=<?php echo $apellido_perito;?>>
               <br>
              
             </div>
@@ -36,7 +60,7 @@
               <label for="validationTooltipUsername" class="form-label">Correo</label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-                <input type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" name="correo" required>
+                <input type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" name="correo" value=<?php echo $correo_perito;?>>
             
               </div>
             </div>
@@ -44,28 +68,28 @@
 
             <div id="Telefonoparticular">
                 <label>Telefono particular</label>
-                <input type="tel" id="telefono_particular" class="form-control" name="telefonoparticular" required>
+                <input type="tel" id="telefono_particular" class="form-control" name="telefonoparticular" value=<?php echo $telefono_p;?>>
             </div><br>
 
             <div id="Telefonomovil">
                 <label>Telefono movil</label>
-                <input type="tel"  id="telefono_movil" class="form-control" name="telefonomovil" required> 
+                <input type="tel"  id="telefono_movil" class="form-control" name="telefonomovil" value=<?php echo $telefono_m;?>> 
             </div><br>
             
             <div id="Registros">
                 <label>Registros</label>
-                <input type="text"  id="Registro" class="form-control" name="registro" required>
+                <input type="text"  id="Registro" class="form-control" name="registro" value=<?php echo $telefono_p;?>>
             </div><br>
 
             <div id="Residencia">
                 <label>Residencia</label>
-                <input type="text" name="Residencia" class="form-control" id="Residencia" name="Residencia" required>
+                <input type="text" name="Residencia" class="form-control" id="Residencia" name="Residencia" value=<?php echo $registros_perito;?>>
             </div><br>
                 
             <div class="col-md-3 position-relative">
               <label for="validationTooltip04" class="form-label">Estado o provincia</label>
-              <select class="form-select" id="validationTooltip04" name="estado" required>
-                <option selected disabled value="">Estado...</option>
+              <select class="form-select" id="validationTooltip04" name="estado" value=<?php echo $estado_provincia_perito;?>>
+                <option selected disabled value=><?php echo $estado_provincia_perito;?></option>
                 <option value="AGUACALIENTES">AGUACALIENTES</option>
                 <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
                 <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
@@ -146,77 +170,69 @@
                $datos_adjuntos;
 
                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    if(empty($_POST["nombre"])){
-                        echo "el nombre es requerido";
-                    }else{
+                    if(!empty($_POST["nombre"])){
                         $nombre = $_POST["nombre"];
                     }
-                    if(empty($_POST["apellidos"])){
-                        echo "el apellido es requerido ";
-                    }else{
+                   
+                    if(!empty($_POST["apellidos"])){
                         $apellido = $_POST["apellidos"];
                     }
                         
-                    if(empty($_POST["correo"])){
-                        echo "el correo es requerido";
-                    }else{
+                    if(!empty($_POST["correo"])){
                         $correo = $_POST["correo"];
                     }
                     
-                    if(empty($_POST["telefonoparticular"])){
-                        echo "el telefono particular es requerido ";
-                    }else{
+                    if(!empty($_POST["telefonoparticular"])){
                         $telefono_particular = $_POST["telefonoparticular"];
                     }
+                        
+                    
         
-                    if(empty($_POST["telefonomovil"])){
-                        echo "el telefono movil es requerido ";
-                    }else{
+                    if(!empty($_POST["telefonomovil"])){
                         $telefono_movil = $_POST["telefonomovil"];
                     }
-        
-                    if(empty($_POST["registro"])){
-                        echo "el registro es requerido ";
-                    }else{
+                        
+                    
+                    if(!empty($_POST["registro"])){
                         $registros = $_POST["registro"];
                     }
         
-                    if(empty($_POST["Residencia"])){
-                        echo "la residencia es requerda ";
-                    }else{
+                    if(!empty($_POST["Residencia"])){
                         $residencia = $_POST["Residencia"];
                     }
-        
-                    if(empty($_POST["estado"])){
-                        echo "el estado es requerido ";
-                    }else{
+                    
+                    if(!empty($_POST["estado"])){
                         $estado = $_POST["estado"];
                     }
-                    if(empty($_POST["notas"])){
-                        echo "la nota es requerida ";
-                    }else{
+                    if(!empty($_POST["notas"])){     
                         $notas = $_POST["notas"];
                     }
-                    if(empty($_POST["archivo"])){
-                        echo "el archivo es requerido ";
-                    }else{
+
+                    if(!empty($_POST["archivo"])){
                         $datos_adjuntos = $_POST["archivo"];
-                        
+                    }else{
+                        $datos_adjuntos = "null";
                     }
+
+                    
                  }
 
                
-              if(isset($_POST["actualizar"])){
+              if(isset($_POST["editar"])){
                   require("conexion.php");
                   $conexion = mysqli_connect("localhost","root","","directorio");
                   $nombre_perito = $_GET['nombre'];
                   $consulta = "UPDATE contactos SET Nombre='$nombre',Apellidos='$apellido', Correoelectronico='$correo',Telefonoparticular='$telefono_particular',
                   Telefonomovil='$telefono_movil',Registros='$registros',Residencia='$residencia',Ciudad='$ciudad',Estado_provincia='$estado',Notas='$notas',Datos_adjuntos='$datos_adjuntos' WHERE Nombre='$nombre_perito'";
-                  mysqli_query($conexion,$consulta);                   
+                  mysqli_query($conexion,$consulta);
+                  echo "<script> alert('se ha actualizado');</script>";
+
+
               }
               
-          
           ?>
+
     </div>
+    <a href='Administrador.php'>REGRESAR</a>
 </body>
 </html>
