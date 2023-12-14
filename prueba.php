@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +98,7 @@
         <table class="table table-striped">
 
                                         
-                        <thead>    
+                        <thead class="table-dark">    
                         <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
@@ -114,54 +113,62 @@
                         </thead>
                         <tbody> 
 
-            <?php
-                
-                    require("conexion.php");
-                    
+                            <?php
+                                
+                                    require("conexion.php");
+                                    
 
-                $conexion = new mysqli($servername, $username, $password,$database);
-                $salida="";
-                $query = "SELECT * FROM contactos ORDER BY ID";
+                                $conexion = new mysqli($servername, $username, $password,$database);
+                                $salida="";
+                                $query = "SELECT * FROM contactos ORDER BY ID";
 
-                if(isset($_POST['buscar'])){
-                    $nombre=$conexion->real_escape_string($_POST['nombre']);
-                    $apellido=$conexion->real_escape_string($_POST['apellidos']);
-                    $registro=$conexion->real_escape_string($_POST['registro']);
-                    $estado=$conexion->real_escape_string($_POST['estado']);
-                    
-                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
+                                if(isset($_POST['buscar'])){
+                                    $nombre=$conexion->real_escape_string($_POST['nombre']);
+                                    $apellido=$conexion->real_escape_string($_POST['apellidos']);
+                                    $registro=$conexion->real_escape_string($_POST['registro']);
+                                    $estado=$conexion->real_escape_string($_POST['estado']);
+                                    
+                                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
 
-                }
-                
-                $resultado = $conexion->query($query);
-                if($resultado -> num_rows > 0){
-                      while($fila = $resultado->fetch_assoc()){
-                ?>  
-                <tr>
-                        <td><?php echo $fila['Nombre']; ?></td>
-                        <td><?php echo $fila['Apellidos']; ?></td>
-                        <td><?php echo $fila['Correoelectronico']; ?></td>
-                        <td><?php echo $fila['Telefonomovil']; ?></td>
-                        <td><?php echo $fila['Residencia']; ?></td>
-                        <td><?php echo $fila['Registros']; ?></td>
-                        <td><?php echo $fila['Estado_provincia']; ?></td>
-                        <td><?php echo $fila['Notas']; ?></td> 
-                        <td><button type="button" class="btn btn-info" name="mostrar" data-bs-toggle="modal" data-bs-target="#info">info</button></td>
-                        
-                                 
-                <?php 
-                include('info.php');
-                        
-                        }
-                }else{
-                   echo "no hay resultados :(";
-                }
+                                }
+                                
+                                $resultado = $conexion->query($query);
+                                if($resultado -> num_rows > 0){
+                                      while($fila = $resultado->fetch_assoc()){
+                                  ?>  
+                                  <tr>
+                                        <td><?php echo $fila['Nombre']; ?></td>
+                                        <td><?php echo $fila['Apellidos']; ?></td>
+                                        <td><?php echo $fila['Correoelectronico']; ?></td>
+                                        <td><?php echo $fila['Telefonomovil']; ?></td>
+                                        <td><?php echo $fila['Residencia']; ?></td>
+                                        <td><?php echo $fila['Registros']; ?></td>
+                                        <td><?php echo $fila['Estado_provincia']; ?></td>
+                                        <td><?php echo $fila['Notas']; ?></td> 
+                                        <td><a class="btn btn-info" href="info.php?nombre=<?php echo $fila['Nombre']?>">info</a></td>
+                                                
+                                  <?php 
+                                      
+                                                                      
+                                      }
 
-                
-                
-                $conexion->close();
-            ?>
+
+                                    }else{
+                                      echo "no hay resultados :(";
+                                    }
+                                  
+                                    
+                                    
+                                    $conexion->close();
+                                ?>
+                                
+                 
+            </tbody> 
           </table>  
+    
 
     
    </div>
+  
+</body>
+</html>
