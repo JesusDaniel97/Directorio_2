@@ -37,8 +37,9 @@
   <div>
       <center><h2>BUSQUEDA DE PERITOS </h2></center>
   </div> 
+ 
   <div id="formulario" >
-    <form class="row g-3 needs-validation" novalidate method="get" action="">
+    <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="validationCustom01" name="nombre" required><br>
@@ -53,6 +54,15 @@
           <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="registro" required><br>
         </div>
       </div>
+
+      <div class="col-md-4">
+        <label for="validationCustomUsername" class="form-label">Residencia</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="residencia" required><br>
+        </div>
+      </div>
+
+
       <div class="col-md-3">
         <label for="validationCustom04" class="form-label">Busqueda por estado</label>
         <select class="form-select" id="validationCustom04" name="estado"  required>
@@ -106,7 +116,7 @@
         <table class="table table-striped">
 
                                         
-                        <thead>    
+                        <thead class="table-dark">    
                         <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
@@ -121,106 +131,63 @@
                         </thead>
                         <tbody> 
 
-     <?php
-         
-         require("conexion.php");
-         $nombre = "";
-         $apellido = "";
-         $estado = "";
-         $registro = "";
-
-         if(!empty($_GET["nombre"])){
-            $nombre = $_GET["nombre"];
-         }
-         if(!empty($_GET["apellidos"])){
-            $apellido = $_GET["apellidos"];
-         }
-      
-         if(!empty($_GET["estado"])){
-            $estado = $_GET["estado"];
-         }
-      
-         if(!empty($_GET["estado"])){
-            $estado = $_GET["estado"];
-         }
-      
-         if(!empty($_GET["registro"])){
-            $registro = $_GET["registro"];
-         }
-
-         $conexion = new mysqli($servername, $username, $password,$database);
-         $consulta = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
-         
-         $resultado = $conexion->query($consulta);
-         if($resultado -> num_rows > 0){
-              while($fila = $resultado->fetch_assoc()){
-        ?>  
-        <tr>
-                <td><?php echo $fila['Nombre']; ?></td>
-                <td><?php echo $fila['Apellidos']; ?></td>
-                <td><?php echo $fila['Correoelectronico']; ?></td>
-                <td><?php echo $fila['Telefonomovil']; ?></td>
-                <td><?php echo $fila['Residencia']; ?></td>
-                <td><?php echo $fila['Registros']; ?></td>
-                <td><?php echo $fila['Estado_provincia']; ?></td>
-                <td><?php echo $fila['Notas']; ?></td> 
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" name="info">info</button></td>             
-        <?php           
-                }
-         }     
-    ?>
-   </div>
-
-   <div id="info_peritos">
-          <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">PERITOS</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <?php
-                              if(isset($_GET["buscar"])){
-                                $conexion = new mysqli($servername, $username, $password,$database);
-                                $consulta = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
+                            <?php
                                 
-                                $resultado = $conexion->query($consulta);
-                                if($resultado -> num_rows > 0){
-                                  while($fila = $resultado->fetch_assoc()){
+                                    require("conexion.php");
                                     
-                                     echo "<H5>DATOS GENERALES</H5>";
-                                     echo "<p> Nombre: ".$fila["Nombre"]."</p>";
-                                     echo "<p> Apellidos: ".$fila["Apellidos"]."</p>";
-                                     echo "<p> Correo: ".$fila["Correoelectronico"]."</p>"; 
-                                     echo "<p> Telefono Particular: ".$fila["Telefonoparticular"]."</p>";  
-                                     echo "<p> Telefono Movil: ".$fila["Telefonomovil"]."</p>";
-                                     echo "<H5>UBICACION</H5>"; 
-                                     echo "<p> Residencia: ".$fila["Residencia"]."</p>";
-                                     echo "<p> Registro: ".$fila["Registros"]."</p>";  
-                                     echo "<p> Estado Provincia: ".$fila["Estado_provincia"]."</p>";
-                                     echo "<p> Ciudad: ".$fila["Ciudad"]."</p>";
-                                     echo "<H5>COBERTURA</H5>";
-                                     echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
-                                     echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
-                                     echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>"; 
-                                     echo " <textarea class='form-control' id='message-text'></textarea>";     
+
+                                $conexion = new mysqli($servername, $username, $password,$database);
+                                $salida="";
+                                $query = "SELECT * FROM contactos ORDER BY ID";
+
+                                if(isset($_POST['buscar'])){
+                                    $nombre=$conexion->real_escape_string($_POST['nombre']);
+                                    $apellido=$conexion->real_escape_string($_POST['apellidos']);
+                                    $registro=$conexion->real_escape_string($_POST['registro']);
+                                    $estado=$conexion->real_escape_string($_POST['estado']);
+                                    $residencia=$conexion->real_escape_string($_POST['residencia']);
+                                    
+                                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro' OR Residencia='$residencia'";
+
+                                }
+                                
+                                $resultado = $conexion->query($query);
+                                if($resultado -> num_rows > 0){
+                                      while($fila = $resultado->fetch_assoc()){
+                                  ?>  
+                                  <tr>
+                                        <td><?php echo $fila['Nombre']; ?></td>
+                                        <td><?php echo $fila['Apellidos']; ?></td>
+                                        <td><?php echo $fila['Correoelectronico']; ?></td>
+                                        <td><?php echo $fila['Telefonomovil']; ?></td>
+                                        <td><?php echo $fila['Residencia']; ?></td>
+                                        <td><?php echo $fila['Registros']; ?></td>
+                                        <td><?php echo $fila['Estado_provincia']; ?></td>
+                                        <td><?php echo $fila['Notas']; ?></td> 
+                                        <td><a class="btn btn-info" href="info.php?nombre=<?php echo $fila['Nombre']?>">info</a></td>
+                                                
+                                  <?php 
+                                      
+                                                                      
+                                      }
+
+
+                                    }else{
+                                      echo "no hay resultados :(";
                                     }
-                                 }
-                              }   
-                    ?>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+                                  
+                                    
+                                    
+                                    $conexion->close();
+                                ?>
+                                
+                 
+            </tbody> 
+          </table>  
+    
 
+    
    </div>
-
   
 </body>
 </html>
