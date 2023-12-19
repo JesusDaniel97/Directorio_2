@@ -13,27 +13,26 @@
         <div class="card" style="width: 18rem;" id="card">
             <img src="imagenes/imagen_sin_fondo.png" class="card-img-top" alt="...">
             <div class="card-body">
-                <form class="row g-3" name="login" method="post" action="Login.php">
+                <form class="row g-3" name="login" method="post" action="login.php">
                     <div class="col-auto">
                       <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inp" placeholder="usuario" name="usuario"  required >
                     </div>
                     <div class="col-auto">
                       <input type="password" class="form-control" id="inputPassword2" placeholder="Password"  name="contrasenia"  required>
                     </div>
-                    <select name="permiso" id="permiso" class="form-select">
-                      <option selected disabled value="">usuario...</option>
-                       <option value="lector">lector</option>
-                       <option value="administrador">administrador</option>
-                     </select><br>
+                      <select name="permiso" id="permiso" class="form-select">
+                        <option selected disabled value="">usuario...</option>
+                        <option value="lector">lector</option>
+                        <option value="administrador">administrador</option>
+                      </select><br>
                     <div class="col-auto">
                       <button type="submit" class="btn btn-primary mb-3">Iniciar Sesion</button><br>
-                      <label style="color: white;"> O  </label>
-                      <a href="Registro.html">Registrate</a>
                     </div>
                   </form>
+                  <a href="Recuperar_contraseña.html">¿has olvidado tu contraseña?</a>
             </div>
           </div>
     </center>
-    
+   
 </body>
 </html>
