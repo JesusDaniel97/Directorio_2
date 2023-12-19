@@ -12,6 +12,7 @@
 <p>Perito <?php echo $_GET['nombre'];?></p>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#info"> mostrar informacion </button>
+<a href="Sesion.php"></a>
 
 <div class="modal fade" id="info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -22,15 +23,16 @@
       </div>
       <div class="modal-body"> 
        <?php
+
+          $archivo = filter_input(INPUT_GET,'Datos_adjuntos');
           require('conexion.php');
           $conexion = new mysqli($servername, $username, $password,$database);
           $nombre = $_GET['nombre'];
           if(isset($nombre)){
-              $consulta = "SELECT * FROM contactos WHERE Nombre='$nombre'" ;
+              $consulta = "SELECT * FROM contactos WHERE Nombre='$nombre'";
               $resultado = $conexion->query($consulta);
               if($resultado->num_rows>0){
                 while($fila = $resultado->fetch_assoc()){
-    
                       echo "<H5>DATOS GENERALES</H5>";
                       echo "<p> Nombre: ".$fila["Nombre"]."</p>";
                       echo "<p> Apellidos: ".$fila["Apellidos"]."</p>";
@@ -45,8 +47,10 @@
                       echo "<H5>COBERTURA</H5>";
                       echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
                       echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
-                      echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>"; 
-                      echo " <textarea class='form-control' id='message-text'></textarea>";       
+                      echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>";
+                      $documento = $fila['Datos_adjuntos'];
+                      echo "<img src='$documento' width='128' height='128'>";  
+                      echo "<textarea class='form-control' id='message-text'></textarea>";           
                 }
               }
 
