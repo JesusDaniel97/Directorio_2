@@ -55,9 +55,9 @@
       </div>
 
       <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">Residencia</label>
+        <label for="validationCustomUsername2" class="form-label">Residencia</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="residencia" required><br>
+          <input type="text" class="form-control" id="validationCustomUsername2" aria-describedby="inputGroupPrepend" name="residencia" required><br>
         </div>
       </div>
 
@@ -106,7 +106,7 @@
         <center>
 
           <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
-          <a href="Agregar_Perito.html" class="btn btn-success "> + Agregar</a>
+          <a href="Agregar_Perito.php" class="btn btn-success "> + Agregar</a>
         </center>
     </form>
     <br>
