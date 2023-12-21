@@ -52,9 +52,13 @@
           $archivo=$_FILES['archivo']['name'];
           $archivo_tamaño=$_FILES['archivo']['size'];
           $archivo_tipo=$_FILES['archivo']['type'];
+
+          
           if($archivo_tamaño < 4000000){ //4 megabytes
-            $carpeta_destino = $_SERVER['DOCUMENT_ROOT']."/documentos/";
-            move_uploaded_file($_FILES['archivo']['tmp_name'],$carpeta_destino.$archivo);
+                if($archivo_tipo == "image/jpeg" || $archivo_tipo == "image/jpg" || $archivo_tipo == "image/png" || $archivo_tipo == "application/pdf"){
+                    $carpeta_destino = $_SERVER['DOCUMENT_ROOT']."/documentos/";
+                    move_uploaded_file($_FILES['archivo']['tmp_name'],$carpeta_destino.$archivo);
+                }
   
            }else{
              echo "no se puede subir el archivo >:V";
@@ -67,11 +71,11 @@
         die("Conexion fallida: " . mysqli_connect_error());
     }
 
-    $sql = "INSERT INTO  contactos (Nombre, Apellidos ,Correoelectronico, Telefonoparticular,Telefonomovil,Registros,Residencia,Ciudad, Estado_provincia,Notas)
-    VALUES ('$nombre', '$apellido', '$correo','$telefono_particular','$telefono_movil','$registros','$residencia','$ciudad','$estado','$notas');";
+    $sql = "INSERT INTO  contactos (Nombre, Apellidos ,Correoelectronico, Telefonoparticular,Telefonomovil,Registros,Residencia,Ciudad, Estado_provincia,Notas,Datos_adjuntos)
+    VALUES ('$nombre', '$apellido', '$correo','$telefono_particular','$telefono_movil','$registros','$residencia','$ciudad','$estado','$notas','$archivo');";
 
     if (mysqli_multi_query($conexion, $sql)) {
-       //header("Location:Administrador.php");
+        header("Location:Administrador.php");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
     }
