@@ -129,6 +129,7 @@
                                     $estado=$conexion->real_escape_string($_POST['estado']);
                                     
                                     $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
+                                    
 
                                 }
                                 
@@ -146,6 +147,7 @@
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
                                         <td><a class="btn btn-info" href="info.php?nombre=<?php echo $fila['Nombre']?>">info</a></td>
+                                        <td><a class="btn btn-dark" href="archivos.php?nombre=<?php echo $fila['Nombre']?>">archivos</a></td>  
                                                 
                                   <?php 
                                       
