@@ -48,8 +48,7 @@
                       echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
                       echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
                       echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>";
-                      $documento = $fila['Datos_adjuntos'];
-                      echo "<img src='$documento' width='128' height='128'>";  
+                      $archivo = $fila['Datos_adjuntos'];  
                       echo "<textarea class='form-control' id='message-text'></textarea>";           
                 }
               }
@@ -59,6 +58,7 @@
           }
 
        ?>
+       <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
        
        
       </div>
