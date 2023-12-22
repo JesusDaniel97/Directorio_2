@@ -1,24 +1,24 @@
 <?php
-  $usuario = "";
-  $contraseña = "";
-  $confirmar_contraseña = "";
+   require("conexion.php");
+   $conexion = new mysqli($servername, $username, $password,$database);
+   $correo = $_POST['correo'];
 
-  while(empty($_POST["usuario"]) && empty($_POST["password"])){
-      echo "es necesario ingresar un usuario y una la contraseña";
-      break;
-  }
-   $usuario = $_POST["usuario"];
-   $contraseña = $_POST["password"];
-   $confirmar_contraseña = $_POST["confirmarcon"];
-   
+   $consulta = "SELECT * FROM registros WHERE Correo = '$correo'";
+   $nr = mysqli_num_rows($consulta);
 
-   if($contraseña == $confirmar_contraseña){
-        $conexion = mysqli_connect("localhost","root","","directorio");
-        $consulta = "UPDATE registro SET Contrasenia='$confirmar_contraseña' WHERE Usuario='$usuario'";
-        mysqli_query($conexion,$consulta);
-   }else{
-      echo "la contraseña no coincide";
+   if($nr == 1){
+       $mostrar = mysqli_fetch_array($consulta);
+       $enviarpass = $mostrar['pass'];
+       $paracorreo = $correo;
+       $titulo	= "Recuperar contraseña";
+       $mensaje = $enviarpass;
+       $tucorreo = "From:xxx@gmail.com";  
    }
-  
+
+   if(mail($paracorreo,$titulo,$mensaje,$tucorreo)){
+      
+   }
+
+
 
 ?>
