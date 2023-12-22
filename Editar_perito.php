@@ -7,8 +7,9 @@
    require('conexion.php');
    $conexion = new mysqli($servername, $username, $password,$database);
    $nombre = $_GET['nombre'];
+  
    if(isset($nombre)){
-       $consulta = "SELECT * FROM contactos WHERE Nombre='$nombre'" ;
+       $consulta = "SELECT * FROM contactos WHERE Nombre='$nombre'";
        $resultado = $conexion->query($consulta);
        if($resultado->num_rows>0){
          while($fila = $resultado->fetch_assoc()){               
@@ -21,15 +22,13 @@
                 $registros_perito = $fila["Registros"];  
                 $estado_provincia_perito = $fila["Estado_provincia"];
                 $perito_ciudad = $fila["Ciudad"];
-                $perito_datos_adjuntos = $fila["Datos_adjuntos"];
-               
+                           
                      
          }
        }
-    }
+    } 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +42,7 @@
 </head>
 <body>
     <div id="formulario-2">
-        <form class="row g-3 needs-validation" novalidate method="POST" action="">
+        <form class="row g-3 needs-validation" novalidate method="POST" action="" enctype="multipart/form-data">
             <div >
               <label for="validationTooltip01" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="validationTooltip01" name="nombre" value=<?php echo $nombre_perito;?>>
@@ -146,8 +145,8 @@
               </div><br>
 
               <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupFile01">Archivo adjunto</label>
-                <a href=""></a><input type="file" class="form-control" id="inputGroupFile01" name="archivo">
+                <label class="input-group-text" for="archivo">Archivo adjunto</label>
+                <input type="file" class="form-control"  name="archivo" id="archivo">
               </div>
               <br>
 
@@ -167,9 +166,8 @@
                $residencia = "";
                $estado = "";
                $notas = "";
-               $datos_adjuntos;
 
-               if ($_SERVER["REQUEST_METHOD"] == "POST") {
+               if ($_SERVER["REQUEST_METHOD"] == "POST"){
                     if(!empty($_POST["nombre"])){
                         $nombre = $_POST["nombre"];
                     }
@@ -185,9 +183,7 @@
                     if(!empty($_POST["telefonoparticular"])){
                         $telefono_particular = $_POST["telefonoparticular"];
                     }
-                        
-                    
-        
+                                
                     if(!empty($_POST["telefonomovil"])){
                         $telefono_movil = $_POST["telefonomovil"];
                     }
@@ -208,27 +204,32 @@
                         $notas = $_POST["notas"];
                     }
 
-                    if(!empty($_POST["archivo"])){
-                        $datos_adjuntos = $_POST["archivo"];
-                    }else{
-                        $datos_adjuntos = "null";
+                  }
+
+                  $archivo = $_FILES['archivo']['name'];
+                  $archivo_tamaño=$_FILES['archivo']['size'];
+                  $archivo_tipo=$_FILES['archivo']['type'];
+                  if($archivo_tamaño < 4000000){ //4 megabytes
+                    if($archivo_tipo == "image/jpeg" || $archivo_tipo == "image/jpg" || $archivo_tipo == "image/png" || $archivo_tipo == "application/pdf"){
+                        $carpeta_destino = $_SERVER['DOCUMENT_ROOT']."/documentos/";
+                        move_uploaded_file($_FILES['archivo']['tmp_name'],$carpeta_destino.$archivo);
                     }
+      
+                  }else{
+                    echo "no se puede subir el archivo >:V";
+                  }
 
-                    
-                 }
 
-               
+              
               if(isset($_POST["editar"])){
                   require("conexion.php");
                   $conexion = mysqli_connect("localhost","root","","directorio");
                   $nombre_perito = $_GET['nombre'];
-                  $consulta = "UPDATE contactos SET Nombre='$nombre',Apellidos='$apellido', Correoelectronico='$correo',Telefonoparticular='$telefono_particular',
-                  Telefonomovil='$telefono_movil',Registros='$registros',Residencia='$residencia',Ciudad='$ciudad',Estado_provincia='$estado',Notas='$notas',Datos_adjuntos='$datos_adjuntos' WHERE Nombre='$nombre_perito'";
+                  $consulta = "UPDATE contactos SET Nombre='$nombre',Apellidos='$apellido', Correoelectronico='$correo',Telefonoparticular='$telefono_particular',Datos_adjuntos='$archivo',
+                  Telefonomovil='$telefono_movil',Registros='$registros',Residencia='$residencia',Ciudad='$ciudad',Estado_provincia='$estado',Notas='$notas' WHERE Nombre='$nombre_perito'";
                   mysqli_query($conexion,$consulta);
                   echo "<script> alert('se ha actualizado');</script>";
-
-
-              }
+               }
               
           ?>
 
