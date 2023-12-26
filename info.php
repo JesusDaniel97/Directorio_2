@@ -8,6 +8,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
 <p>Perito <?php echo $_GET['nombre'];?></p>
 
@@ -36,9 +37,9 @@
                       echo "<H5>DATOS GENERALES</H5>";
                       echo "<p> Nombre: ".$fila["Nombre"]."</p>";
                       echo "<p> Apellidos: ".$fila["Apellidos"]."</p>";
-                      echo "<p> Correo: ".$fila["Correoelectronico"]."</p>";
-                      echo "<p> Telefono Particular: ".$fila["Telefonoparticular"]."</p>"; 
-                      echo "<p> Telefono Movil: ".$fila["Telefonomovil"]."</p>";
+                      echo "<p> <i class='bi bi-envelope-fill' style='font-size:20px;color:blue;'></i> Correo: ".$fila["Correoelectronico"]."</p>";
+                      echo "<p> <i class='bi bi-telephone-fill' style='font-size:20px;color:blue;'></i>  Telefono Particular: ".$fila["Telefonoparticular"]."</p>"; 
+                      echo "<p> <i class='bi bi-phone-fill' style='font-size:20px;color:blue;'></i>Telefono Movil: ".$fila["Telefonomovil"]."</p>";
                       echo "<H5>UBICACION</H5>"; 
                       echo "<p> Residencia: ".$fila["Residencia"]."</p>";
                       echo "<p> Registro: ".$fila["Registros"]."</p>";  
@@ -47,6 +48,7 @@
                       echo "<H5>COBERTURA</H5>";
                       echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
                       echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
+                      echo "<H5>Datos adjuntos </H5>";
                       echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>";
                       $archivo = $fila['Datos_adjuntos'];  
                       echo "<textarea class='form-control' id='message-text'></textarea>";           
@@ -58,9 +60,8 @@
           }
 
        ?>
-       <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
-       
-       
+
+            <img src="/documentos/<?php echo $archivo?>" width="400" height="400"> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
