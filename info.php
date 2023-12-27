@@ -39,12 +39,12 @@
                       echo "<p> Apellidos: ".$fila["Apellidos"]."</p>";
                       echo "<p> <i class='bi bi-envelope-fill' style='font-size:20px;color:blue;'></i> Correo: ".$fila["Correoelectronico"]."</p>";
                       echo "<p> <i class='bi bi-telephone-fill' style='font-size:20px;color:blue;'></i>  Telefono Particular: ".$fila["Telefonoparticular"]."</p>"; 
-                      echo "<p> <i class='bi bi-phone-fill' style='font-size:20px;color:blue;'></i>Telefono Movil: ".$fila["Telefonomovil"]."</p>";
+                      echo "<p> <i class='bi bi-phone-fill' style='font-size:20px;color:blue;'></i> Telefono Movil: ".$fila["Telefonomovil"]."</p>";
                       echo "<H5>UBICACION</H5>"; 
-                      echo "<p> Residencia: ".$fila["Residencia"]."</p>";
-                      echo "<p> Registro: ".$fila["Registros"]."</p>";  
-                      echo "<p> Estado Provincia: ".$fila["Estado_provincia"]."</p>";
-                      echo "<p> Ciudad: ".$fila["Ciudad"]."</p>";
+                      echo "<p> <i class='bi bi-house-door-fill' style='font-size:20px;color:blue;'></i> Residencia: ".$fila["Residencia"]."</p>";
+                      echo "<p> <i class='bi bi-folder-symlink-fill' style='font-size:20px;color:blue;'></i> Registro: ".$fila["Registros"]."</p>";  
+                      echo "<p> <i class='bi bi-geo-alt-fill' style='font-size:20px;color:blue;'></i> Estado Provincia: ".$fila["Estado_provincia"]."</p>";
+                      echo "<p> <i class='bi bi-building-fill' style='font-size:20px;color:blue;'></i> Ciudad: ".$fila["Ciudad"]."</p>";
                       echo "<H5>COBERTURA</H5>";
                       echo "<p> Sin viaticos: ".$fila["Sin_viaticos"]."</p>";
                       echo "<p> Con viaticos: ".$fila["Con_viaticos"]."</p>"; 
