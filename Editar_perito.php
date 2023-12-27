@@ -223,19 +223,23 @@
                     }
 
                   }
-
-                  $archivo = $_FILES['archivo']['name'];
-                  $archivo_tamaño=$_FILES['archivo']['size'];
-                  $archivo_tipo=$_FILES['archivo']['type'];
-                  if($archivo_tamaño < 4000000){ //4 megabytes
-                    if($archivo_tipo == "image/jpeg" || $archivo_tipo == "image/jpg" || $archivo_tipo == "image/png" || $archivo_tipo == "application/pdf"){
-                        $carpeta_destino = $_SERVER['DOCUMENT_ROOT']."/documentos/";
-                        move_uploaded_file($_FILES['archivo']['tmp_name'],$carpeta_destino.$archivo);
-                    }
-      
+                  
+                  if(!empty($_FILES['archivo']['name'])){
+                      $archivo = $_FILES['archivo']['name'];
+                      $archivo_tamaño=$_FILES['archivo']['size'];
+                      $archivo_tipo=$_FILES['archivo']['type'];
+                      if($archivo_tamaño < 4000000){ //4 megabytes
+                        if($archivo_tipo == "image/jpeg" || $archivo_tipo == "image/jpg" || $archivo_tipo == "image/png" || $archivo_tipo == "application/pdf"){
+                            $carpeta_destino = $_SERVER['DOCUMENT_ROOT']."/documentos/";
+                            move_uploaded_file($_FILES['archivo']['tmp_name'],$carpeta_destino.$archivo);
+                        }
+          
+                        }else{
+                          echo "no se puede subir el archivo >:V";
+                        }
                   }else{
-                    echo "no se puede subir el archivo >:V";
-                  }
+                    $archivo = null;
+                  }  
 
 
               
