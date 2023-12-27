@@ -170,38 +170,56 @@
                if ($_SERVER["REQUEST_METHOD"] == "POST"){
                     if(!empty($_POST["nombre"])){
                         $nombre = $_POST["nombre"];
+                    }else{
+                      $nombre = "";
                     }
                    
                     if(!empty($_POST["apellidos"])){
                         $apellido = $_POST["apellidos"];
+                    }else{
+                      $apellido = "";
                     }
                         
                     if(!empty($_POST["correo"])){
                         $correo = $_POST["correo"];
+                    }else{
+                      $correo = "";
                     }
+                       
                     
                     if(!empty($_POST["telefonoparticular"])){
                         $telefono_particular = $_POST["telefonoparticular"];
+                    }else{
+                        $telefono_particular = "";
                     }
                                 
                     if(!empty($_POST["telefonomovil"])){
                         $telefono_movil = $_POST["telefonomovil"];
+                    }else{
+                        $telefono_movil = "";
                     }
                         
-                    
                     if(!empty($_POST["registro"])){
                         $registros = $_POST["registro"];
+                    }else{
+                        $registros = "";
                     }
         
                     if(!empty($_POST["Residencia"])){
                         $residencia = $_POST["Residencia"];
+                    }else{
+                        $residencia = "";
                     }
                     
                     if(!empty($_POST["estado"])){
                         $estado = $_POST["estado"];
+                    }else{
+                      $estado = "";
                     }
                     if(!empty($_POST["notas"])){     
                         $notas = $_POST["notas"];
+                    }else{
+                        $notas = "";
                     }
 
                   }
