@@ -38,20 +38,51 @@
                         echo "<p> <i class='bi bi-envelope-fill' style='font-size:20px;color:blue;'></i> Correo: ".$fila["Correoelectronico"]."</p>";
                         echo "<p> <i class='bi bi-telephone-fill' style='font-size:20px;color:blue;'></i>  Telefono Particular: ".$fila["Telefonoparticular"]."</p>"; 
                         echo "<p> <i class='bi bi-phone-fill' style='font-size:20px;color:blue;'></i> Telefono Movil: ".$fila["Telefonomovil"]."</p>";
-                        echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>";
+                        //echo "<p> Datos adjuntos ".$fila["Datos_adjuntos"]."</p>";
+                        echo "<H5>Datos adjuntos</H5>";
                         $archivo = $fila['Datos_adjuntos'];
-                        
+                        echo $archivo;
                    }
                 }
 
             } else{
-            echo "no exsite";
+             echo "no exsite";
+            }
+            $tipo=substr($archivo,-4);
+            if($tipo == ".pdf"){
+        ?>  
+                <iframe src="/documentos/<?php echo $archivo?>" width="300" height="300"></iframe>
+
+      <?php
+      
             }
 
-        ?>
-            <img src="/documentos/<?php echo $archivo?>" width="100" height="100">
-            <iframe src="/documentos/<?php echo $archivo?>" width="300" height="300"></iframe>
-            
+          if($tipo == ".jpg" || $tipo == ".JPG"){  
+      ?>
+             <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
+
+      <?php
+      
+          }
+
+          if($tipo == ".jpeg" || $tipo == ".JPEG"){
+      ?> 
+
+             <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
+          
+
+     <?php
+     
+          }
+
+          if($tipo == ".png" || $tipo == ".PNG"){
+     ?>
+           <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
+     
+     <?php
+     
+          }
+     ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -60,4 +91,5 @@
     </div>
   </div>
 </div>
+
 
