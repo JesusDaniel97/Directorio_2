@@ -31,7 +31,7 @@
       <center><h2>BUSQUEDA DE PERITOS </h2></center>
   </div> 
   <div id="formulario" >
-    <form class="row g-3 needs-validation" novalidate method="POST" action="archivos.php">
+    <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="validationCustom01" name="nombre" required><br>
