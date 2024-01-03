@@ -19,6 +19,12 @@
             $_SESSION["usuario"] = $_POST["usuario"];
             header('Location:Administrador.php');
           }
+          
+          if($fila['role'] == "Archivos"){
+            session_start();
+            $_SESSION['usuario'] = $_POST['usuario'];
+            header('Location:Lector_archivos.php');
+          }
        }
     }else{
       header("Location:index.html");
@@ -27,4 +33,3 @@
 
 
 ?>
-    
