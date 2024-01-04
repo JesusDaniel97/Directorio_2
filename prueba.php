@@ -34,16 +34,16 @@
     <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="validationCustom01" name="nombre" required><br>
+        <input type="search" class="form-control" id="validationCustom01" name="nombre" required><br>
       </div>
       <div class="col-md-4">
         <label for="validationCustom02" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="validationCustom02" name="apellidos"  required><br>
+        <input type="search" class="form-control" id="validationCustom02" name="apellidos"  required><br>
       </div>
       <div class="col-md-4">
         <label for="validationCustomUsername" class="form-label">Registro</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="registro" required><br>
+          <input type="search" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="registro" required><br>
         </div>
       </div>
       <div class="col-md-3">
@@ -99,7 +99,7 @@
         <table class="table table-striped">
 
                                         
-                        <thead class="table-dark">    
+                        <thead>    
                         <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
@@ -109,7 +109,7 @@
                         <th>Registros</th>
                         <th>Estado Provincia</th>
                         <th>Notas</th>
-                        <th>Mostrar info</th>
+                        <th>Mostrar archivo</th>
                         </tr>
                         </thead>
                         <tbody> 
@@ -128,11 +128,14 @@
                                     $apellido=$conexion->real_escape_string($_POST['apellidos']);
                                     $registro=$conexion->real_escape_string($_POST['registro']);
                                     $estado=$conexion->real_escape_string($_POST['estado']);
-                                    
-                                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro'";
 
+                                    $query = "SELECT * FROM contactos WHERE Nombre LIKE \"%$nombre%\"";
+                                    $query = "SELECT * FROM contactos WHERE Apellidos LIKE \"%$apellido%\"";
+                                    $query = "SELECT * FROM contactos WHERE Apellidos LIKE \"%$apellido%\"";
+                                    $query = "SELECT * FROM contactos WHERE Estado_provincia = '$estado'";
+                  
                                 }
-                                
+            
                                 $resultado = $conexion->query($query);
                                 if($resultado -> num_rows > 0){
                                       while($fila = $resultado->fetch_assoc()){
@@ -146,10 +149,10 @@
                                         <td><?php echo $fila['Registros']; ?></td>
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
-                                        <td><a class="btn btn-dark" href="archivos.php?nombre=<?php echo $fila['Nombre']?>">archivos<i class="bi bi-file-earmark"></i></a></td>
+                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['Nombre']?>"><i class="bi bi-file-earmark"></i>Archivo</button></td>
                                                 
                                   <?php 
-                                      
+                                      include('modal.php');
                                                                       
                                       }
 
