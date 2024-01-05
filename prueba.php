@@ -33,59 +33,10 @@
   <div id="formulario" >
     <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Nombre</label>
-        <input type="search" class="form-control" id="validationCustom01" name="nombre" required><br>
+        <label for="validationCustom01" class="form-label">Perito</label>
+        <input type="search" class="form-control" id="validationCustom01" name="perito" placeholder="Nombre Apellido Registro Ciudad o Estado" required><br>
       </div>
-      <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Apellido</label>
-        <input type="search" class="form-control" id="validationCustom02" name="apellidos"  required><br>
-      </div>
-      <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">Registro</label>
-        <div class="input-group has-validation">
-          <input type="search" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="registro" required><br>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <label for="validationCustom04" class="form-label">Busqueda por estado</label>
-        <select class="form-select" id="validationCustom04" name="estado"  required>
-          <option selected disabled value="">Estado...</option>
-          <option value="AGUACALIENTES">AGUACALIENTES</option>
-          <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
-          <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
-          <option value="CAMPECHE">CAMPECHE</option>
-          <option value="CHIAPAS">CHIAPAS</option>
-          <option value="CHIHUAHUA">CHIHAHUA</option>
-          <option value="CIUDAD DE MEXICO">CIUDAD DE MEXICO</option>
-          <option value="COAHUILA">COAHUILA</option>
-          <option value="COLIMA">COLIMA</option>
-          <option value="DURANGO">DURANGO</option>
-          <option value="ESTADO DE MEXICO">ESTADO DE MEXICO</option>
-          <option value="GUANAJUATO">GUANAJUATO</option>
-          <option value="GUERRERO">GUERRERO</option>
-          <option value="HIDALGO">HIDALGO</option>
-          <option value="JALISCO">JALISCO</option>
-          <option value="MICHOACAN">MICHOACAN</option>
-          <option value="MORELOS">MORELOS</option>
-          <option value="NARAYIT">NAYARIT</option>
-          <option value="NUEVO LEON">NUEVO LEON</option>
-          <option value="OAXACA">OAXACA</option>
-          <option value="PUEBLA">PUEBLA</option>
-          <option value="QUERETARO">QUERETARO</option>
-          <option value="QUINTANA ROO">QUINTANA ROO</option>
-          <option value="SAN LUIS POTOSI">SAN LUIS POTOSI</option>
-          <option value="SINALOA">SINALOA</option>
-          <option value="SONORA">SONORA</option>
-          <option value="TABASCO">TABASCO</option>
-          <option value="TAMAULIPAS">TAMAULIPAS</option>
-          <option value="TLAXCALA">TLAXCALA</option>
-          <option value="VERACRUZ">VERACRUZ</option>
-          <option value="YUCATAN">YUCATAN</option>
-          <option value="ZACATECAS">ZACATECAS</option>
-        </select><br>
-        <div class="invalid-feedback">
-          Selecciona un estado valido.
-        </div>
+      
       </div>
         <center>
 
@@ -124,15 +75,12 @@
                                 $query = "SELECT * FROM contactos ORDER BY ID";
 
                                 if(isset($_POST['buscar'])){
-                                    $nombre=$conexion->real_escape_string($_POST['nombre']);
-                                    $apellido=$conexion->real_escape_string($_POST['apellidos']);
-                                    $registro=$conexion->real_escape_string($_POST['registro']);
-                                    $estado=$conexion->real_escape_string($_POST['estado']);
+                                    $perito=$conexion->real_escape_string($_POST['perito']);
+                                    //$apellido=$conexion->real_escape_string($_POST['apellidos']);
+                                    //$registro=$conexion->real_escape_string($_POST['registro']);
+                                    //$estado=$conexion->real_escape_string($_POST['estado']);
 
-                                    $query = "SELECT * FROM contactos WHERE Nombre LIKE \"%$nombre%\"";
-                                    $query = "SELECT * FROM contactos WHERE Apellidos LIKE \"%$apellido%\"";
-                                    $query = "SELECT * FROM contactos WHERE Apellidos LIKE \"%$apellido%\"";
-                                    $query = "SELECT * FROM contactos WHERE Estado_provincia = '$estado'";
+                                    $query = "SELECT * FROM contactos WHERE Nombre LIKE \"%$perito%\"OR Apellidos LIKE \"%$perito%\" OR Registros LIKE \"%$perito%\" OR Ciudad LIKE \"%$perito%\" OR Estado_provincia LIKE \"%$perito%\"";
                   
                                 }
             
@@ -141,6 +89,7 @@
                                       while($fila = $resultado->fetch_assoc()){
                                   ?>  
                                   <tr>
+          
                                         <td><?php echo $fila['Nombre']; ?></td>
                                         <td><?php echo $fila['Apellidos']; ?></td>
                                         <td><?php echo $fila['Correoelectronico']; ?></td>
@@ -149,7 +98,7 @@
                                         <td><?php echo $fila['Registros']; ?></td>
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
-                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['Nombre']?>"><i class="bi bi-file-earmark"></i>Archivo</button></td>
+                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>Archivo</button></td>
                                                 
                                   <?php 
                                       include('modal.php');
@@ -174,3 +123,4 @@
   
   </body>
 </html>
+
