@@ -1,3 +1,10 @@
+<?php
+     session_start();
+     if(!isset($_SESSION["usuario"])){
+        header("Location:index.html");
+     }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +23,7 @@
 
 <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
     <div class="bg-dark p-4">
-       
+      <?php echo "<li><h3 style='color:white;'>".$_SESSION["usuario"]."</i></h3>";?>
       <span class="text-body-secondary"><a href="Cerrar_Sesion.php">Cerrar Sesion</a></span>
     </div>
   </div>
