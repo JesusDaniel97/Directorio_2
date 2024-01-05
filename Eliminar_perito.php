@@ -1,3 +1,10 @@
+<?php
+     session_start();
+     if(!isset($_SESSION["usuario"])){
+        header("Location:index.html");
+     }
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +15,6 @@
 </head>
 <body>
     
-
     <div class="container mt-5">
     <div class="row">
     <div class="col-sm-6 offset-sm-3">
@@ -33,8 +39,8 @@
                    $nombre = $_GET['nombre'];
                    $conexion = mysqli_connect("localhost","root","","directorio");
                    $consulta = "DELETE FROM contactos WHERE Nombre='$nombre'" ;
-                   mysqli_query($conexion,$consulta); 
-                   
+                   mysqli_query($conexion,$consulta);
+                   header("Location:Administrador.php");  
                } 
             ?>
           
