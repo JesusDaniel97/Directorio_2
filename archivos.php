@@ -1,3 +1,4 @@
+
 <?php
      session_start();
      if(!isset($_SESSION["usuario"])){
@@ -56,7 +57,8 @@
             $tipo=substr($archivo,-4);
             if($tipo == ".pdf"){
         ?>  
-                <iframe src="/documentos/<?php echo $archivo?>" width="300" height="300"></iframe>
+                <!--<iframe src="/documentos/<?php echo $archivo?>" width="300" height="300"></iframe>-->
+                <a href="/documentos/<?php echo $archivo?>"><img src="imagenes/pdf.png" width="100" height="100"></a>
 
       <?php
       
@@ -64,7 +66,8 @@
 
           if($tipo == ".jpg" || $tipo == ".JPG"){  
       ?>
-             <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
+             <!--<img src="/documentos/<?php echo $archivo?>" width="400" height="400">-->
+             <a href="/documentos/<?php echo $archivo?>"><img src="imagenes/imagen.jpg" width="100" height="100"></a>
 
       <?php
       
@@ -73,7 +76,8 @@
           if($tipo == ".jpeg" || $tipo == ".JPEG"){
       ?> 
 
-             <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
+             <!--<img src="/documentos/<?php echo $archivo?>" width="400" height="400">-->
+             <a href="/documentos/<?php echo $archivo?>"><img src="imagenes/imagen.jpg" width="100" height="100"></a>
           
 
      <?php
@@ -82,12 +86,15 @@
 
           if($tipo == ".png" || $tipo == ".PNG"){
      ?>
-           <img src="/documentos/<?php echo $archivo?>" width="400" height="400">
+           <!--<img src="/documentos/<?php echo $archivo?>" width="400" height="400">-->
+           <a href="/documentos/<?php echo $archivo?>"><img src="imagenes/imagen.jpg" width="100" height="100"></a>
      
      <?php
      
           }
      ?>
+
+     
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -96,6 +103,8 @@
     </div>
   </div>
 </div>
+
+<a href="Lector_archivos.php">atras</a>
 
 
 
