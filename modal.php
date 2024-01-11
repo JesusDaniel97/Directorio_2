@@ -9,32 +9,25 @@
     <title>Document</title>
 </head>
 <body>
-<div class="modal fade" id="modal<?php echo $fila['ID']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <?php echo $fila['Nombre'];?><br>
-        <?php echo $fila['Apellidos'];?><br>
-        <?php echo $fila['Telefonoparticular'];?><br>
-        <?php echo $fila['Telefonomovil'];?><br>
-        <?php echo $fila['Correoelectronico'];?><br>
-        <?php echo $fila["Residencia"];?><br>
-        <?php echo $fila["Registros"];?><br>
-        <?php echo $fila["Ciudad"];?><br>
-        <?php echo $fila["Estado_provincia"];?><br>
-        
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+          <div class="modal fade" id="modal<?php echo $fila['ID']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <?php $nombre= $fila['Nombre'];?><br>
+                  <?php $archivo = $fila['Datos_adjuntos']?><br>
+                  <?php require('modal2.php');?>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
 </body>
 </html>
