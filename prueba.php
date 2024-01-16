@@ -34,7 +34,7 @@
     <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Perito</label>
-        <input type="search" class="form-control" id="validationCustom01" name="perito" placeholder="Nombre Apellido Registro Ciudad o Estado" required><br>
+        <input type="text" class="form-control" id="validationCustom01" name="perito" placeholder="Nombre Apellido Registro Ciudad o Estado" required><br>
       </div>
       
       </div>
@@ -98,10 +98,13 @@
                                         <td><?php echo $fila['Registros']; ?></td>
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
-                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>Archivo</button></td>
+                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>ELIMIENAR</button></td>
+                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal2<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>Archivo</button></td>
+                                       
                                                 
                                   <?php 
                                       include('modal.php');
+                                      include('modal2.php');
                                                                       
                                       }
 
