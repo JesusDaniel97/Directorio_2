@@ -49,16 +49,21 @@
         <input type="text" class="form-control" id="validationCustom02" name="apellidos"  required><br>
       </div>
       <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">Registro</label>
+        <label for="validationCustomUsername03" class="form-label">Registro</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="registro" required><br>
+          <input type="text" class="form-control" id="validationCustomUsername03" aria-describedby="inputGroupPrepend" name="registro" required><br>
         </div>
       </div>
 
       <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">Residencia</label>
+        <label for="validationCustomUsername04" class="form-label">Residencia</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="residencia" required><br>
+          <input type="text" class="form-control" id="validationCustomUsername04" aria-describedby="inputGroupPrepend" name="residencia" required><br>
+        </div>
+
+        <label for="validationCustomUsername05" class="form-label">Municipio</label>
+        <div class="input-group has-validation">
+          <input type="search" class="form-control" id="validationCustomUsername05" aria-describedby="inputGroupPrepend" name="municipio" required><br>
         </div>
       </div>
 
@@ -124,6 +129,7 @@
                         <th>Telefono Movil</th>
                         <th>Residencia</th>
                         <th>Registros</th>
+                        <th>Municipios</th>
                         <th>Estado Provincia</th>
                         <th>Notas</th>
                         <th>Mostrar info</th>
@@ -146,8 +152,9 @@
                                     $registro=$conexion->real_escape_string($_POST['registro']);
                                     $estado=$conexion->real_escape_string($_POST['estado']);
                                     $residencia=$conexion->real_escape_string($_POST['residencia']);
+                                    $municipio=$conexion->real_escape_string($_POST['municipio']);
                                     
-                                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro' OR Residencia='$residencia'";
+                                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro' OR Residencia='$residencia' OR Ciudad = '$municipio'";
 
                                 }
                                 
@@ -162,6 +169,7 @@
                                         <td><?php echo $fila['Telefonomovil']; ?></td>
                                         <td><?php echo $fila['Residencia']; ?></td>
                                         <td><?php echo $fila['Registros']; ?></td>
+                                        <td><?php echo $fila['Ciudad']; ?></td>
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
                                         <td><a class="btn btn-info" href="info.php?nombre=<?php echo $fila['Nombre']?>">info</a></td>
