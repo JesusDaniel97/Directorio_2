@@ -41,23 +41,28 @@
     <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="validationCustom01" name="nombre" required><br>
+        <input type="search" class="form-control" id="validationCustom01" name="nombre" required><br>
       </div>
       <div class="col-md-4">
         <label for="validationCustom02" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="validationCustom02" name="apellidos"  required><br>
+        <input type="search" class="form-control" id="validationCustom02" name="apellidos"  required><br>
       </div>
       <div class="col-md-4">
         <label for="validationCustomUsername" class="form-label">Registro</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="registro" required><br>
+          <input type="search" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="registro" required><br>
         </div>
       </div>
 
       <div class="col-md-4">
         <label for="validationCustomUsername2" class="form-label">Residencia</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="validationCustomUsername2" aria-describedby="inputGroupPrepend" name="residencia" required><br>
+          <input type="search" class="form-control" id="validationCustomUsername2" aria-describedby="inputGroupPrepend" name="residencia" required><br>
+        </div>
+
+        <label for="validationCustomUsername05" class="form-label">Municipio</label>
+        <div class="input-group has-validation">
+          <input type="search" class="form-control" id="validationCustomUsername05" aria-describedby="inputGroupPrepend" name="municipio" required><br>
         </div>
       </div>
 
@@ -106,11 +111,12 @@
         <center>
 
           <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
-          <a href="Agregar_Perito.php" class="btn btn-success "> + Agregar</a>
+          
         </center>
     </form>
     <br>
-
+    <a href="Agregar_Perito.php" class="btn btn-success "> + Agregar perito</a>
+    <a href="Registro_usuarios.php"  class="btn btn-outline-secondary"> + Agregar Usuario</a>
   </div>
    <div id="tabla_peritos">
         <table class="table table-striped">
@@ -124,9 +130,10 @@
                         <th>Telefono Movil</th>
                         <th>Residencia</th>
                         <th>Registros</th>
+                        <th>Municipios</th>
                         <th>Estado Provincia</th>
                         <th>Notas</th>
-                        <th>Mostrar info</th>
+                        <th>ACCIONES</th>
                         </tr>
                         </thead>
                         <tbody> 
@@ -146,8 +153,9 @@
                                     $registro=$conexion->real_escape_string($_POST['registro']);
                                     $estado=$conexion->real_escape_string($_POST['estado']);
                                     $residencia=$conexion->real_escape_string($_POST['residencia']);
+                                    $municipio=$conexion->real_escape_string($_POST['municipio']);
                                     
-                                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro' OR Residencia='$residencia'";
+                                    $query = "SELECT * FROM contactos WHERE Nombre = '$nombre' OR Apellidos = '$apellido' OR Estado_provincia='$estado' OR Registros='$registro' OR Residencia='$residencia' OR Ciudad = '$municipio'";
 
                                 }
                                 
@@ -162,6 +170,7 @@
                                         <td><?php echo $fila['Telefonomovil']; ?></td>
                                         <td><?php echo $fila['Residencia']; ?></td>
                                         <td><?php echo $fila['Registros']; ?></td>
+                                        <td><?php echo $fila['Ciudad']; ?></td>
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
                                         <td><a class="btn btn-info" href="info.php?nombre=<?php echo $fila['Nombre']?>">info</a></td>
