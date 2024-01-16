@@ -17,10 +17,32 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <?php $nombre= $fila['Nombre'];?><br>
-                  <?php $archivo = $fila['Datos_adjuntos']?><br>
-                  <?php require('modal2.php');?>
-                  
+                <div class="alert alert-danger text-center">
+                    <p>¿Desea confirmar la eliminacion del Perito <?php echo $fila["Nombre"]?></p>
+                </div>    
+                <div class="row">
+                    <div class="col-sm-6">
+                        <form action="" method="POST">
+                            <input type="hidden" name="accion" value="eliminar_registro">
+                            <input type="hidden" name="nombre" value="<?php echo $fila['Nombre']; ?>">
+                            <input type="submit" name="eliminar" value="Eliminar" class= " btn btn-danger">
+                            <a href="Administrador.php" class="btn btn-success">Cancelar</a>
+                      </form>    
+                                          
+                    </div>
+                </div>  
+
+
+                <?php
+                  if(isset($_POST["eliminar"])){
+                        require("conexion.php");
+                        $nombre = $fila['nombre'];
+                        $conexion = mysqli_connect("localhost","root","","directorio");
+                        $consulta = "DELETE FROM contactos WHERE Nombre='$nombre'" ;
+                        mysqli_query($conexion,$consulta);
+                        header("Location:Administrador.php");  
+                    } 
+            ?> 
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
