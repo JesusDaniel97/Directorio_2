@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
 </head>
 <body>
 
@@ -33,11 +34,73 @@
   <div id="formulario" >
     <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Perito</label>
-        <input type="text" class="form-control" id="validationCustom01" name="perito" placeholder="Nombre Apellido Registro Ciudad o Estado" required><br>
+        <label for="validationCustom01" class="form-label">Nombre</label>
+        <input type="search" class="form-control" id="validationCustom01" name="nombre" placeholder="Nombre" required><br>
+      </div>
+
+      <div class="col-md-4">
+        <label for="validationCustom02" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="validationCustom02" name="apellido" placeholder="Apellido" required><br>
+      </div>
+
+      <div class="col-md-4">
+        <label for="validationCustom03" class="form-label">Registro</label>
+        <input type="text" class="form-control" id="validationCustom03" name="registro" placeholder="Registro" required><br>
       </div>
       
+      <div class="col-md-3">
+        <label for="validationCustom04" class="form-label">Busqueda por estado</label>
+        <select class="form-select" id="validationCustom04" name="estado"  required>
+          <option selected disabled value="">Estado...</option>
+          <option value="AGUACALIENTES">AGUACALIENTES</option>
+          <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
+          <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
+          <option value="CAMPECHE">CAMPECHE</option>
+          <option value="CHIAPAS">CHIAPAS</option>
+          <option value="CHIHUAHUA">CHIHAHUA</option>
+          <option value="CIUDAD DE MEXICO">CIUDAD DE MEXICO</option>
+          <option value="COAHUILA">COAHUILA</option>
+          <option value="COLIMA">COLIMA</option>
+          <option value="DURANGO">DURANGO</option>
+          <option value="ESTADO DE MEXICO">ESTADO DE MEXICO</option>
+          <option value="GUANAJUATO">GUANAJUATO</option>
+          <option value="GUERRERO">GUERRERO</option>
+          <option value="HIDALGO">HIDALGO</option>
+          <option value="JALISCO">JALISCO</option>
+          <option value="MICHOACAN">MICHOACAN</option>
+          <option value="MORELOS">MORELOS</option>
+          <option value="NARAYIT">NAYARIT</option>
+          <option value="NUEVO LEON">NUEVO LEON</option>
+          <option value="OAXACA">OAXACA</option>
+          <option value="PUEBLA">PUEBLA</option>
+          <option value="QUERETARO">QUERETARO</option>
+          <option value="QUINTANA ROO">QUINTANA ROO</option>
+          <option value="SAN LUIS POTOSI">SAN LUIS POTOSI</option>
+          <option value="SINALOA">SINALOA</option>
+          <option value="SONORA">SONORA</option>
+          <option value="TABASCO">TABASCO</option>
+          <option value="TAMAULIPAS">TAMAULIPAS</option>
+          <option value="TLAXCALA">TLAXCALA</option>
+          <option value="VERACRUZ">VERACRUZ</option>
+          <option value="YUCATAN">YUCATAN</option>
+          <option value="ZACATECAS">ZACATECAS</option>
+        </select><br>
+        <div class="invalid-feedback">
+          Selecciona un estado valido.
+        </div>
       </div>
+
+      <div class="col-md-3">
+        <label for="validationCustom04" class="form-label">Municipio</label>
+        <select class="form-select" id="validationCustom04" name="estado"  required>
+        
+        </select><br>
+        <div class="invalid-feedback">
+          Selecciona un estado valido.
+        </div>
+      </div>
+
+      
         <center>
 
           <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
@@ -75,14 +138,28 @@
                                 $query = "SELECT * FROM contactos ORDER BY ID";
 
                                 if(isset($_POST['buscar'])){
-                                    $perito=$conexion->real_escape_string($_POST['perito']);
-                                    //$apellido=$conexion->real_escape_string($_POST['apellidos']);
-                                    //$registro=$conexion->real_escape_string($_POST['registro']);
-                                    //$estado=$conexion->real_escape_string($_POST['estado']);
+                                  $nombre = $conexion->real_escape_string($_POST['nombre']);
+                                  $apellido = $conexion->real_escape_string($_POST['apellido']); // Added line for last name
+                                  $estado = $conexion->real_escape_string($_POST['estado']); // Added line for state
+                                  $registro = $conexion->real_escape_string($_POST['registro']); 
+                                  $query = "SELECT * FROM contactos WHERE Nombre LIKE '%$nombre%'";
+                              
+                                  // Check if the last name is provided, then include it in the query
+                                  if (!empty($apellido)) {
+                                      $query .= " AND Apellidos LIKE '%$apellido%'";
+                                  }
+                              
+                                  // Check if the state is selected, then include it in the query
+                                  if (!empty($estado)) {
+                                      $query .= " AND Estado_provincia = '$estado'";
+                                  }else{
+                                       $estado = "estado";
+                                  }
 
-                                    $query = "SELECT * FROM contactos WHERE Nombre LIKE \"%$perito%\"OR Apellidos LIKE \"%$perito%\" OR Registros LIKE \"%$perito%\" OR Ciudad LIKE \"%$perito%\" OR Estado_provincia LIKE \"%$perito%\"";
-                  
+                                  if (!empty($registro)) {
+                                    $query .= " AND Registros LIKE '%$registro%'";
                                 }
+                              }
             
                                 $resultado = $conexion->query($query);
                                 if($resultado -> num_rows > 0){
@@ -99,12 +176,14 @@
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
                                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>ELIMIENAR</button></td>
-                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal2<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>Archivo</button></td>
+                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal2<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>INFO</button></td>
+                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#Modal3<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>DOC</button></td>
                                        
                                                 
                                   <?php 
                                       include('modal.php');
                                       include('modal2.php');
+                                      include('Modal3.php');
                                                                       
                                       }
 
