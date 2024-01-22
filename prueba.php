@@ -19,6 +19,7 @@
     <div class="bg-dark p-4">
        
       <span class="text-body-secondary"><a href="Cerrar_Sesion.php">Cerrar Sesion</a></span>
+      
     </div>
   </div>
   <nav class="navbar navbar-dark bg-dark">
@@ -47,70 +48,36 @@
         <label for="validationCustom03" class="form-label">Registro</label>
         <input type="text" class="form-control" id="validationCustom03" name="registro" placeholder="Registro" required><br>
       </div>
-      
-      <div class="col-md-3">
-        <label for="validationCustom04" class="form-label">Busqueda por estado</label>
-        <select class="form-select" id="validationCustom04" name="estado"  required>
-          <option selected disabled value="">Estado...</option>
-          <option value="AGUACALIENTES">AGUACALIENTES</option>
-          <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
-          <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
-          <option value="CAMPECHE">CAMPECHE</option>
-          <option value="CHIAPAS">CHIAPAS</option>
-          <option value="CHIHUAHUA">CHIHAHUA</option>
-          <option value="CIUDAD DE MEXICO">CIUDAD DE MEXICO</option>
-          <option value="COAHUILA">COAHUILA</option>
-          <option value="COLIMA">COLIMA</option>
-          <option value="DURANGO">DURANGO</option>
-          <option value="ESTADO DE MEXICO">ESTADO DE MEXICO</option>
-          <option value="GUANAJUATO">GUANAJUATO</option>
-          <option value="GUERRERO">GUERRERO</option>
-          <option value="HIDALGO">HIDALGO</option>
-          <option value="JALISCO">JALISCO</option>
-          <option value="MICHOACAN">MICHOACAN</option>
-          <option value="MORELOS">MORELOS</option>
-          <option value="NARAYIT">NAYARIT</option>
-          <option value="NUEVO LEON">NUEVO LEON</option>
-          <option value="OAXACA">OAXACA</option>
-          <option value="PUEBLA">PUEBLA</option>
-          <option value="QUERETARO">QUERETARO</option>
-          <option value="QUINTANA ROO">QUINTANA ROO</option>
-          <option value="SAN LUIS POTOSI">SAN LUIS POTOSI</option>
-          <option value="SINALOA">SINALOA</option>
-          <option value="SONORA">SONORA</option>
-          <option value="TABASCO">TABASCO</option>
-          <option value="TAMAULIPAS">TAMAULIPAS</option>
-          <option value="TLAXCALA">TLAXCALA</option>
-          <option value="VERACRUZ">VERACRUZ</option>
-          <option value="YUCATAN">YUCATAN</option>
-          <option value="ZACATECAS">ZACATECAS</option>
-        </select><br>
-        <div class="invalid-feedback">
-          Selecciona un estado valido.
-        </div>
-      </div>
 
-      <div class="col-md-3">
-        <label for="validationCustom04" class="form-label">Municipio</label>
-        <select class="form-select" id="validationCustom04" name="estado"  required>
-        
-        </select><br>
-        <div class="invalid-feedback">
-          Selecciona un estado valido.
+      <div class="input-field col s12 m12 l6">
+            <select id="estado" name="estado" class="form-select" aria-label="Default select example"></select>
+            <label for="estado">Estado</label>
         </div>
-      </div>
-
-      
+        <div class="input-field col s12 m12 l6">
+            <select id="municipio" name="municipio" class="form-select" aria-label="Default select example"></select>
+            <label for="municipio">Municipio</label>
+        </div>      
         <center>
 
           <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
         </center>
     </form>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="municipios.js"></script>
+    <script type="text/javascript" src="select_estados.js"></script>
+   
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('select').material_select();
+        });
+    </script>
     <br>
 
   </div>
    <div id="tabla_peritos">
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
 
                                         
                         <thead>    
@@ -142,6 +109,7 @@
                                   $apellido = $conexion->real_escape_string($_POST['apellido']); // Added line for last name
                                   $estado = $conexion->real_escape_string($_POST['estado']); // Added line for state
                                   $registro = $conexion->real_escape_string($_POST['registro']); 
+                                  $municipio = $conexion->real_escape_string($_POST['municipio']);
                                   $query = "SELECT * FROM contactos WHERE Nombre LIKE '%$nombre%'";
                               
                                   // Check if the last name is provided, then include it in the query
@@ -152,13 +120,15 @@
                                   // Check if the state is selected, then include it in the query
                                   if (!empty($estado)) {
                                       $query .= " AND Estado_provincia = '$estado'";
-                                  }else{
-                                       $estado = "estado";
-                                  }
+                                  }    
 
                                   if (!empty($registro)) {
                                     $query .= " AND Registros LIKE '%$registro%'";
-                                }
+                                  }
+
+                                  if (!empty($municipio)) {
+                                    $query .= " AND Ciudad = '$municipio'";
+                                  } 
                               }
             
                                 $resultado = $conexion->query($query);
@@ -174,6 +144,7 @@
                                         <td><?php echo $fila['Residencia']; ?></td>
                                         <td><?php echo $fila['Registros']; ?></td>
                                         <td><?php echo $fila['Estado_provincia']; ?></td>
+                                        <td><?php echo $fila['Ciudad']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
                                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>ELIMIENAR</button></td>
                                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal2<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>INFO</button></td>
