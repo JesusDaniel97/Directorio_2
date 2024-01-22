@@ -1,3 +1,4 @@
+
 <?php
    session_start();
    if(!isset($_SESSION["usuario"])){
@@ -24,6 +25,7 @@
   <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
     <div class="bg-dark p-4">
       <h5 style="color:white;">BIENVENIDO ADMINISTRADOR/A <?php echo $_SESSION["usuario"]?></h5> 
+      <a href="Registro_usuarios.php"> Agregar Usuario</a><br>
       <span class="text-body-secondary"><a href="Cerrar_Sesion.php">Cerrar Sesion</a></span>
     </div>
   </div>
@@ -116,7 +118,7 @@
     </form>
     <br>
     <a href="Agregar_Perito.php" class="btn btn-success "> + Agregar perito</a>
-    <a href="Registro_usuarios.php"  class="btn btn-outline-secondary"> + Agregar Usuario</a>
+    
   </div>
    <div id="tabla_peritos">
         <table class="table table-striped">
@@ -201,5 +203,4 @@
    </div>
   
   </body>
-</html>
-  
+</html> 
