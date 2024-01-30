@@ -18,7 +18,8 @@
 <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
     <div class="bg-dark p-4">
        
-      <span class="text-body-secondary"><a href="Cerrar_Sesion.php">Cerrar Sesion</a></span>
+      <a href="Cerrar_Sesion.php">Cerrar Sesion</a><br>
+        
       
     </div>
   </div>
@@ -30,9 +31,11 @@
     </div>      
   </nav> 
   <div>
-      <center><h2>BUSQUEDA DE PERITOS </h2></center>
+      <center><h2> PERITOS MODVAL</h2></center>
   </div> 
   <div id="formulario" >
+    <h5>busqueda general</h5>
+    
     <form class="row g-3 needs-validation" novalidate method="POST" action="">
       <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Nombre</label>
@@ -45,18 +48,37 @@
       </div>
 
       <div class="col-md-4">
+        <label for="validationCustom02" class="form-label">Correo</label>
+        <input type="text" class="form-control" id="validationCustom02" name="correo" placeholder="Correo" required><br>
+      </div>
+      
+      <div class="col-md-4">
         <label for="validationCustom03" class="form-label">Registro</label>
         <input type="text" class="form-control" id="validationCustom03" name="registro" placeholder="Registro" required><br>
       </div>
+
+      <h5>busqueda Residencia</h5>
 
       <div class="input-field col s12 m12 l6">
             <select id="estado" name="estado" class="form-select" aria-label="Default select example"></select>
             <label for="estado">Estado</label>
         </div>
-        <div class="input-field col s12 m12 l6">
+         <div class="input-field col s12 m12 l6">
             <select id="municipio" name="municipio" class="form-select" aria-label="Default select example"></select>
             <label for="municipio">Municipio</label>
-        </div>      
+         </div>    
+      
+      <h5>busqueda por cobertura</h5>
+      <div class="input-field col s12 m12 l6">
+        <select id="estado" name="estado" class="form-select" aria-label="Default select example"></select>
+        <label for="estado">Estado</label>
+      </div>
+
+        <div class="input-field col s12 m12 l6">
+          <select id="municipio" name="municipio" class="form-select" aria-label="Default select example"></select>
+          <label for="municipio">Municipio</label>
+        </div> 
+             
         <center>
 
           <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
@@ -168,11 +190,12 @@
                                     $conexion->close();
                                 ?>
                                 
-                 
             </tbody> 
           </table>  
     
    </div>
+
+   
   
   </body>
 </html>
