@@ -14,15 +14,14 @@
     
 </head>
 <body>
-
-<div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+<div>
+      <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
     <div class="bg-dark p-4">
-       
-      <a href="Cerrar_Sesion.php">Cerrar Sesion</a><br>
-        
-      
+        <a>Cerrar Sesion</a><br>  
+        <center><h2 style="color:white;"> PERITOS MODVAL</h2></center>
     </div>
-  </div>
+  </div>    
+  </div> 
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,75 +29,83 @@
       </button>
     </div>      
   </nav> 
-  <div>
-      <center><h2> PERITOS MODVAL</h2></center>
-  </div> 
-  <div id="formulario" >
-    <h5>busqueda general</h5>
-    
-    <form class="row g-3 needs-validation" novalidate method="POST" action="">
-      <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Nombre</label>
-        <input type="search" class="form-control" id="validationCustom01" name="nombre" placeholder="Nombre" required><br>
-      </div>
+ 
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <form class="row g-3 needs-validation" novalidate method="POST" action="">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  BUSQUEDA GENERAL
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                <div class="col-md-4">
+                      <label for="validationCustom01" class="form-label">Nombre</label>
+                      <input type="search" class="form-control" id="validationCustom01" name="nombre" placeholder="Nombre" required><br>
+                    </div>
 
-      <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="validationCustom02" name="apellido" placeholder="Apellido" required><br>
-      </div>
+                    <div class="col-md-4">
+                      <label for="validationCustom02" class="form-label">Apellido</label>
+                      <input type="text" class="form-control" id="validationCustom02" name="apellido" placeholder="Apellido" required><br>
+                    </div>
 
-      <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Correo</label>
-        <input type="text" class="form-control" id="validationCustom02" name="correo" placeholder="Correo" required><br>
-      </div>
-      
-      <div class="col-md-4">
-        <label for="validationCustom03" class="form-label">Registro</label>
-        <input type="text" class="form-control" id="validationCustom03" name="registro" placeholder="Registro" required><br>
-      </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  BUSQUEDA POR UBICACION
+                </button>
+              </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="input-field col s12 m12 l6">
+                                <select id="estado" name="estado" class="form-select" aria-label="Default select example"></select>
+                                <label for="estado">Estado</label>
+                            </div>
+                            <div class="input-field col s12 m12 l6">
+                                <select id="municipio" name="municipio" class="form-select" aria-label="Default select example"></select>
+                                <label for="municipio">Municipio</label>
+                            </div> 
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          BUSQUEDA POR COBERTURA
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="input-field col s12 m12 l6">
+                                  <select id="cobertura" name="cobertura" class="form-select" aria-label="Default select example"></select>
+                                  <label for="cobertura">Estado</label>
+                                </div>
 
-      <h5>busqueda Residencia</h5>
+                                  <div class="input-field col s12 m12 l6">
+                                    <select id="municipios_cobertura" name="municipios_cobertura" class="form-select" aria-label="Default select example"></select>
+                                    <label for="municipios_cobertura">Municipio</label>
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+          </div>
 
-      <div class="input-field col s12 m12 l6">
-            <select id="estado" name="estado" class="form-select" aria-label="Default select example"></select>
-            <label for="estado">Estado</label>
-        </div>
-         <div class="input-field col s12 m12 l6">
-            <select id="municipio" name="municipio" class="form-select" aria-label="Default select example"></select>
-            <label for="municipio">Municipio</label>
-         </div>    
-      
-      <h5>busqueda por cobertura</h5>
-      <div class="input-field col s12 m12 l6">
-        <select id="estado" name="estado" class="form-select" aria-label="Default select example"></select>
-        <label for="estado">Estado</label>
-      </div>
-
-        <div class="input-field col s12 m12 l6">
-          <select id="municipio" name="municipio" class="form-select" aria-label="Default select example"></select>
-          <label for="municipio">Municipio</label>
-        </div> 
-             
-        <center>
-
-          <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
-        </center>
-    </form>
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="municipios.js"></script>
-    <script type="text/javascript" src="select_estados.js"></script>
-   
-
-    <script type="text/javascript">
+              <center>
+              <button type="submit" name="buscar" class="btn btn-primary"><i class="fa fa-search"></i> buscar</button>
+            </center>
+       </form>  
+       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+       <script type="text/javascript" src="select_estados.js"></script>
+       <script type="text/javascript" src="municipios.js"></script>
+       <script type="text/javascript" src="cobertura.js"></script>
+        
+       <script type="text/javascript">
         $(document).ready(function(){
           $('select').material_select();
         });
-    </script>
-    <br>
-
-  </div>
-   <div id="tabla_peritos">
+        </script>
+         <div id="tabla_peritos">
         <table class="table table-striped table-hover">
 
                                         
@@ -109,7 +116,7 @@
                         <th>Correo</th>
                         <th>Telefono Movil</th>
                         <th>Residencia</th>
-                        <th>Registros</th>
+                        <th>Ciudad</th>
                         <th>Estado Provincia</th>
                         <th>Notas</th>
                         <th>Mostrar archivo</th>
@@ -129,8 +136,7 @@
                                 if(isset($_POST['buscar'])){
                                   $nombre = $conexion->real_escape_string($_POST['nombre']);
                                   $apellido = $conexion->real_escape_string($_POST['apellido']); // Added line for last name
-                                  $estado = $conexion->real_escape_string($_POST['estado']); // Added line for state
-                                  $registro = $conexion->real_escape_string($_POST['registro']); 
+                                  $cobertura = $conexion->real_escape_string($_POST['cobertura']); // Added line for state
                                   $municipio = $conexion->real_escape_string($_POST['municipio']);
                                   $query = "SELECT * FROM contactos WHERE Nombre LIKE '%$nombre%'";
                               
@@ -140,13 +146,11 @@
                                   }
                               
                                   // Check if the state is selected, then include it in the query
-                                  if (!empty($estado)) {
-                                      $query .= " AND Estado_provincia = '$estado'";
+                                  if (!empty($cobertura)) {
+                                      $query .= " AND Estado_provincia = '$cobertura'";
                                   }    
 
-                                  if (!empty($registro)) {
-                                    $query .= " AND Registros LIKE '%$registro%'";
-                                  }
+                                  
 
                                   if (!empty($municipio)) {
                                     $query .= " AND Ciudad = '$municipio'";
@@ -164,9 +168,8 @@
                                         <td><?php echo $fila['Correoelectronico']; ?></td>
                                         <td><?php echo $fila['Telefonomovil']; ?></td>
                                         <td><?php echo $fila['Residencia']; ?></td>
-                                        <td><?php echo $fila['Registros']; ?></td>
-                                        <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Ciudad']; ?></td>
+                                        <td><?php echo $fila['Estado_provincia']; ?></td>
                                         <td><?php echo $fila['Notas']; ?></td> 
                                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>ELIMIENAR</button></td>
                                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" name="mostrar" data-bs-target="#modal2<?php echo $fila['ID']?>"><i class="bi bi-file-earmark"></i>INFO</button></td>
@@ -199,4 +202,5 @@
   
   </body>
 </html>
+        
 
