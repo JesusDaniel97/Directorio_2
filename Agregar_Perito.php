@@ -106,7 +106,9 @@
               </div><br>
               <label >Notas</label>
               <textarea name="notas" cols="30" rows="10">Notas</textarea>
-              <br>     
+              <br>  
+              
+              
 
                 <div class="input-group mb-3">
                   <label class="input-group-text" for="archivo">Archivo adjunto</label>
@@ -114,10 +116,14 @@
                 </div>
                 <br>
 
+                <a href="cobertura.php" class="btn btn-primary"><label for="">Agregar coberturas</label></a>
+
               <div class="col-12">
                  <center><input type="submit" name="enviar" class="btn btn-primary" value="Registrar"/></center>
               </div>
             </form>
+             
+            
       </div>
   </body>
 </html>
