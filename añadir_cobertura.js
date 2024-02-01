@@ -22,3 +22,27 @@ function añadir_cobertura(){
     document.body.appendChild(municipio);
 
 }
+
+
+
+function añadir_cobertura(){
+     
+    let estados=["AGUASCALIENTES","BAJA CALIFORNIA","BAJA CALIFORNIA SUR","CAMPECHE","CAMPECHE",];
+    
+    var cobertura = document.createElement("select");
+    var nombre = document.createElement("option");
+    let option1Texto = document.createTextNode("ESTADOS");
+    nombre.appendChild(option1Texto);
+
+    for(let estado = 0; estado < estados.length;estado++){
+          opciones = document.createElement("option");
+          let option3Texto = document.createTextNode(estados[estado]);
+          opciones.appendChild(option3Texto);
+          cobertura.appendChild(opciones);
+    }
+    
+    cobertura.appendChild(nombre);
+    document.body.appendChild(cobertura);
+    
+
+}
