@@ -1,5 +1,6 @@
 <?php
     $nombre = "";
+    $CURP = "";
     $apellido = "";
     $correo = "";
     $telefono_particular = "";
@@ -12,6 +13,13 @@
     $datos_adjuntos;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+        if(!empty($_POST["CURP"])){
+            $CURP = $_POST["CURP"];
+        }else{
+            $CURP = "";
+        }
+
         if(!empty($_POST["nombre"])){
             $nombre = $_POST["nombre"];
         }else{
@@ -64,42 +72,45 @@
             $notas = $_POST["notas"];
         }else{
             $notas = "";
-        }        
-     }
-     
-          $archivo=$_FILES['archivo']['name'];
-          $archivo_tamaño=$_FILES['archivo']['size'];
-          $archivo_tipo=$_FILES['archivo']['type'];
+        }
 
-          
-          if($archivo_tamaño < 4000000){ //4 megabytes
-                if($archivo_tipo == "image/jpeg" || $archivo_tipo == "image/jpg" || $archivo_tipo == "image/png" || $archivo_tipo == "application/pdf"){
-                    $carpeta_destino = $_SERVER['DOCUMENT_ROOT']."/documentos/";
-                    move_uploaded_file($_FILES['archivo']['tmp_name'],$carpeta_destino.$archivo);
-                }
-  
-           }else{
-             echo "no se puede subir el archivo >:V";
-           }
+        $archivo=$_FILES['archivo']['name'];
+        $archivo_tamaño=$_FILES['archivo']['size'];
+        $archivo_tipo=$_FILES['archivo']['type'];
 
-    
-    include('conexion.php');     
-    $conexion = new mysqli($servername, $username, $password,$database);
-    if (!$conexion) {
-        die("Conexion fallida: " . mysqli_connect_error());
-    }
+        if($archivo_tamaño < 4000000){ //4 megabytes
+            if($archivo_tipo == "image/jpeg" || $archivo_tipo == "image/jpg" || $archivo_tipo == "image/png" || $archivo_tipo == "application/pdf"){
+                $carpeta_destino = $_SERVER['DOCUMENT_ROOT']."/documentos/";
+                move_uploaded_file($_FILES['archivo']['tmp_name'],$carpeta_destino.$archivo);
+            }
+        } else {
+            echo "No se puede subir el archivo >:V";
+        }
 
-    $sql = "INSERT INTO  contactos (Nombre, Apellidos ,Correoelectronico, Telefonoparticular,Telefonomovil,Registros,Residencia,Ciudad, Estado_provincia,Notas,Datos_adjuntos)
-    VALUES ('$nombre', '$apellido', '$correo','$telefono_particular','$telefono_movil','$registros','$residencia','$ciudad','$estado','$notas','$archivo');";
+        include('conexion.php');     
+        $conexion = new mysqli($servername, $username, $password,$database);
+        if (!$conexion) {
+            die("Conexion fallida: " . mysqli_connect_error());
+        }
 
-    if (mysqli_multi_query($conexion, $sql)) {
-        header("Location:Administrador.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
-    }
+        $verificar_sql = "SELECT * FROM contactos WHERE CURP = '$CURP'";
+        $resultado = mysqli_query($conexion, $verificar_sql);
+
+        if(mysqli_num_rows($resultado) > 0) {
+            echo "<script>alert('Ya hay un perito existente.')</script>";
+        } else {
+            // comparar por la curp añadir un campo curp
+            $sql = "INSERT INTO  contactos (Nombre, Apellidos, Correoelectronico, Telefonoparticular, Telefonomovil, Registros, Residencia, Ciudad, Estado_provincia, Notas, Datos_adjuntos)
+            VALUES ('$nombre', '$apellido', '$correo', '$telefono_particular', '$telefono_movil', '$registros', '$residencia', '$ciudad', '$estado', '$notas', '$archivo');";
+
+            if (mysqli_multi_query($conexion, $sql)) {
+                header("Location: Administrador.php");
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
+            }
+        }
         
-    mysqli_close($conexion);
-    //echo "<img src=$datos_adjuntos>";
-     
-
+        mysqli_close($conexion);
+    }
 ?>
+
