@@ -33,6 +33,13 @@
                 <br>
               
               </div>
+
+              <div class="col-md-4 position-relative">
+                <label for="validationTooltip03" class="form-label">CURP</label>
+                <input type="text" class="form-control" id="validationTooltip03" name="curp" required>
+                <br>
+              
+              </div>
               <div class="col-md-4 position-relative">
                 <label for="validationTooltipUsername" class="form-label">Correo</label>
                 <div class="input-group has-validation">
