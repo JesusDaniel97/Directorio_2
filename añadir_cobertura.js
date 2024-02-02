@@ -46,3 +46,68 @@ function añadir_cobertura(){
     
 
 }
+
+function añadir_cobertura() {
+    let estados = ["AGUASCALIENTES", "BAJA CALIFORNIA", "BAJA CALIFORNIA SUR", "CHIHUAHUA", "OAXACA"];
+
+    var cobertura = document.createElement("select");
+    var nombre = document.createElement("option");
+    let option1Texto = document.createTextNode("Seleccionar Estado");
+    nombre.appendChild(option1Texto);
+    cobertura.appendChild(nombre);
+
+    for (let estado = 0; estado < estados.length; estado++) {
+        let opciones = document.createElement("option");
+        let option3Texto = document.createTextNode(estados[estado]);
+        opciones.appendChild(option3Texto);
+        cobertura.appendChild(opciones);
+    }
+
+    // Añadir el evento onChange para manejar la selección del estado
+    cobertura.addEventListener("change", function() {
+        // Obtener el valor del estado seleccionado
+        let selectedEstado = cobertura.value;
+
+        // Llamar a la función para agregar el select de municipios
+        agregarMunicipios(selectedEstado);
+    });
+
+    document.body.appendChild(cobertura);
+}
+
+function agregarMunicipios(estado) {
+    // Define un objeto con los municipios para cada estado
+    let municipiosPorEstado = {
+        "AGUASCALIENTES": ["Aguascalientes Municipio 1", "Aguascalientes Municipio 2"],
+        "BAJA CALIFORNIA": ["Baja California Municipio 1", "Baja California Municipio 2"],
+        "BAJA CALIFORNIA SUR": ["Baja California Sur Municipio 1", "Baja California Sur Municipio 2"],
+        "CHIHUAHUA": ["Chihuahua Municipio 1", "Chihuahua Municipio 2"],
+        "OAXACA": ["Oaxaca Municipio 1", "Oaxaca Municipio 2"]
+        // Agrega más estados y sus respectivos municipios según sea necesario
+    };
+
+    // Verificar si el estado tiene municipios definidos
+    if (municipiosPorEstado.hasOwnProperty(estado)) {
+        // Crear el select de municipios
+        var municipiosSelect = document.createElement("select");
+        var municipiosOption = document.createElement("option");
+        let optionTexto = document.createTextNode("Seleccionar Municipio");
+        municipiosOption.appendChild(optionTexto);
+        municipiosSelect.appendChild(municipiosOption);
+
+        // Agregar los municipios al select
+        municipiosPorEstado[estado].forEach(function(municipio) {
+            let municipioOption = document.createElement("option");
+            let optionTexto = document.createTextNode(municipio);
+            municipioOption.appendChild(optionTexto);
+            municipiosSelect.appendChild(municipioOption);
+        });
+
+        // Añadir el select de municipios al body
+        document.body.appendChild(municipiosSelect);
+    }
+}
+
+// Llama a la función para agregar la cobertura con estados
+añadir_cobertura();
+
