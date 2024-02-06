@@ -1,13 +1,14 @@
+
 <?php
     $nombre = "";
-    $CURP = "";
+    $Curp = "";
     $apellido = "";
     $correo = "";
     $telefono_particular = "";
     $telefono_movil = "";
     $ciudad = "";
     $registros = "";
-    $residencia = "";
+    $municipio = "";
     $estado = "";
     $notas = "";
     $datos_adjuntos;
@@ -15,9 +16,9 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if(!empty($_POST["CURP"])){
-            $CURP = $_POST["CURP"];
+            $Curp = $_POST["CURP"];
         }else{
-            $CURP = "";
+            $Curp = "";
         }
 
         if(!empty($_POST["nombre"])){
@@ -57,10 +58,10 @@
             $registros = $_POST["registro"];
         }
 
-        if(!empty($_POST["Residencia"])){
-            $residencia = $_POST["Residencia"];
+        if(!empty($_POST["municipio"])){
+            $municipio = $_POST["municipio"];
         }else{
-            $residencia = "";
+            $municipio = "";
         }
                 
         if(!empty($_POST["estado"])){
@@ -100,8 +101,8 @@
             echo "<script>alert('Ya hay un perito existente.')</script>";
         } else {
             // comparar por la curp añadir un campo curp
-            $sql = "INSERT INTO  contactos (Nombre, Apellidos, Correoelectronico, Telefonoparticular, Telefonomovil, Registros, Residencia, Ciudad, Estado_provincia, Notas, Datos_adjuntos)
-            VALUES ('$nombre', '$apellido', '$correo', '$telefono_particular', '$telefono_movil', '$registros', '$residencia', '$ciudad', '$estado', '$notas', '$archivo');";
+            $sql = "INSERT INTO  contactos (Nombre, Apellidos, Correoelectronico, Telefonoparticular, Telefonomovil, Registros, Ciudad, Estado, Notas, Datos_adjuntos)
+            VALUES ('$nombre', '$apellido', '$correo', '$telefono_particular', '$telefono_movil', '$registros', '$municipio', '$estado', '$notas', '$archivo');";
 
             if (mysqli_multi_query($conexion, $sql)) {
                 header("Location: Administrador.php");
@@ -113,4 +114,3 @@
         mysqli_close($conexion);
     }
 ?>
-
