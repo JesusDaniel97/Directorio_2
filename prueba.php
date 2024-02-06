@@ -43,7 +43,7 @@
                 <div class="col-md-4">
                       <label for="validationCustom01" class="form-label">Nombre</label>
                       <input type="search" class="form-control" id="validationCustom01" name="nombre" placeholder="Nombre" required><br>
-                    </div>
+                </div>
 
                     <div class="col-md-4">
                       <label for="validationCustom02" class="form-label">Apellido</label>
@@ -67,7 +67,7 @@
                             <div class="input-field col s12 m12 l6">
                                 <select id="municipio" name="municipio" class="form-select" aria-label="Default select example"></select>
                                 <label for="municipio">Municipio</label>
-                            </div> 
+                          </div> 
                     </div>
                     <div class="accordion-item">
                       <h2 class="accordion-header">
@@ -80,12 +80,12 @@
                             <div class="input-field col s12 m12 l6">
                                   <select id="cobertura" name="cobertura" class="form-select" aria-label="Default select example"></select>
                                   <label for="cobertura">Estado</label>
-                                </div>
+                            </div>
 
                                   <div class="input-field col s12 m12 l6">
                                     <select id="municipios_cobertura" name="municipios_cobertura" class="form-select" aria-label="Default select example"></select>
                                     <label for="municipios_cobertura">Municipio</label>
-                              </div>
+                                  </div>
                         </div>
                       </div>
                     </div>
@@ -98,7 +98,7 @@
        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
        <script type="text/javascript" src="select_estados.js"></script>
        <script type="text/javascript" src="municipios.js"></script>
-       <script type="text/javascript" src="cobertura.js"></script>
+       <script type="text/javascript" src="coberturas.js"></script>
         
        <script type="text/javascript">
         $(document).ready(function(){
@@ -200,6 +200,14 @@
 
    
   
+  </body>
+</html>
+        
+    
+
+      
+          
+   
   </body>
 </html>
         
