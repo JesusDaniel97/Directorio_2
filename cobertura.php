@@ -20,11 +20,12 @@
         </form>
     </div>
    
-    <input type="submit" value="añadir cobertura">
+    <input type="submit" value="añadir_cobertura" name="añadir">
+     
+    <button onclick="añadir_cobertura()">Añadir mas coberturas</button><br>
+    <script src="aumentar_cobertura.js"></script>
+    <script src="coberturas.js"></script>
 
-    <button onclick="añadir_cobertura()">Añadir mas coberturas</button>
-    <script src="añadir_cobertura.js"></script> 
-    <script src="cobertura.js"></script>
  
 </body>
 </html>
